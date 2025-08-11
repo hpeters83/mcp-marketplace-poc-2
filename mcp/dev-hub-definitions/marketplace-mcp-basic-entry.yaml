@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: marketplace-mcp-basic-entry
-  title: MCP Server Builer (v1754921460)
+  title: MCP Server Builer (v1754928697)
   description: "This marketplace entry builds a Flogo MCP Server and deploys it to a TIBCO Dataplane."
   backstage.io/techdocs-ref: dir:.
   tibco.developer.hub/marketplace:
@@ -157,7 +157,7 @@ spec:
       action: tibco:git:clone
       input:
         failOnError: true
-        repoUrl: "https://github.com/hpeters83/mcp-marketplace-poc"
+        repoUrl: "https://github.com/hpeters83/mcp-marketplace-poc-2"
 
 
 # 1. Test Connection (list flogo versions)
