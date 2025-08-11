@@ -1,0 +1,318 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: marketplace-mcp-basic-entry
+  title: MCP Server Builer (v1754921460)
+  description: "This marketplace entry builds a Flogo MCP Server and deploys it to a TIBCO Dataplane."
+  backstage.io/techdocs-ref: dir:.
+  tibco.developer.hub/marketplace:
+    isNew: true
+    popularity: 10
+    isMultiInstall: true
+    imageURL: "https://raw.githubusercontent.com/hpeters83/test-public-marketplace/refs/heads/main/images_marketplace/agent_1.webp"
+    owner: "Hugo"
+    moreInfo:
+      - text: "Get more info"
+        url: "https://github.com/hpeters83/dev-hub-marketplace-entries-poc/tree/main/dev-hub-market-place-entries"
+        icon: "docs"
+      - text: "TIBCO"
+        url: "https://www.tibco.com/"
+        icon: "star"
+  tags:
+    - devhub-marketplace
+    - tibco
+    - agent
+    - mcp
+
+spec:
+  owner: group:default/tibco-imported
+  type: agent
+
+# Inputs:
+  parameters:
+    - title: Provide MCP Server Details
+      required:
+        - mcp_server_name
+        - api_to_generate_mcp_server_for
+      properties:
+        mcp_server_name:
+          title: The name of the MCP Server
+          type: string
+          description: Give your MCP Sever a unique name
+          default: 'my-mcp-server'
+
+        api_to_generate_mcp_server_for:
+          title: Select API to generate MCP Server for
+          description: API to generate the MCP Server for
+          type: string
+          ui:field: EntityPicker
+          ui:options:
+            allowedKinds:
+              - API
+#            catalogFilter:
+#              newKey: {}
+
+
+#    - title: EntityPicker Example
+#      properties:
+#        EntityPicker:
+#          type: string
+#          ui:field: EntityPicker
+#          ui:options:
+#            allowedKinds:
+#              - API
+#            catalogFilter:
+#              newKey: {}
+
+    - title: MCP Prompts
+      properties:
+        mcp_prompts:
+          title: MCP Prompts
+          type: array
+          description: Add prompts to use your Flogo MCP Server
+          items:
+            type: object
+            properties:
+              name:
+                title: Prompt Name
+                type: string
+                description: A short identifier for this prompt
+                ui:placeholder: "e.g., 'user-auth-api' or 'validation-helper'"
+              value:
+                title: Prompt Value
+                type: string
+                ui:widget: textarea
+                ui:placeholder: "Enter your prompt here... (e.g., 'Use these tools for...')"
+                ui:options:
+                  rows: 6
+            required:
+              - name
+              - value
+          ui:options:
+            addable: true
+            removable: true
+            orderable: true
+          minItems: 1
+          default:
+            - name: "get-id"
+              value: "Get the ID of the user 1234"
+            - name: "application-report"
+              value: "Make a report of all the control plane applications in failed status"
+
+    - title: MCP Server Deployment Deployment Details
+      required:
+        - dataplane_url
+        - dataplane_host
+        - dataplane_id
+      properties:
+#        control_plane:
+#          title: Select Control Plane
+#          type: string
+#          description: Control Plane you want to deploy the MCP Server to
+        dataplane:
+          title: Select Dataplane
+          type: string
+          description: Dataplane you want to deploy the MCP Server to
+          enum:
+            - demo
+            - Platform-Demo-PMs
+            - MP_v1753956342
+            - pparames-vdi-k8s
+            - pm-demo
+            - pparames-vdi
+          enumNames:
+            - demo
+            - Platform-Demo-PMs
+            - MP_v1753956342
+            - pparames-vdi-k8s
+            - pm-demo
+            - pparames-vdi
+        dataplane_url:
+          title: Dataplane Flogo URL
+          type: string
+          description: URL of the Dataplane with Flogo endpoint to deploy the MCP Server to
+          default: 'https://v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro/tibco/flogo/v1753956342/'
+        dataplane_host:
+          title: Dataplane Hostname
+          type: string
+          description: Hostname of the Dataplane to deploy the MCP Server to
+          default: 'v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro'
+        dataplane_id:
+          title: Dataplane ID
+          type: string
+          description: Id of the Dataplane to deploy the MCP Server to
+          default: 'd25jvuctdkpc73bkq9ag'
+        flogo_capability_instance_id:
+          title: Flogo Capability Instance ID
+          type: string
+          description: Id of the Flogo Capability to deploy the MCP Server to
+          default: 'd25k2j4tdkpc73bkq9fg'
+
+
+  # Install the agents
+  steps:
+
+    - id: clone
+      name: Clone the Project
+      action: tibco:git:clone
+      input:
+        failOnError: true
+        repoUrl: "https://github.com/hpeters83/mcp-marketplace-poc"
+
+
+# 1. Test Connection (list flogo versions)
+    - id: test_connection
+      name: Testing Connection
+      action: tibco:call-platform-api
+      input:
+        baseUrl: ${{ parameters.dataplane_url }}
+        endpoint: "public/v1/dp/flogoversions"
+
+
+    - id: generate_mcp_server
+      name: Generate Flogo MCP Server
+      action: custom:command:execute
+      input:
+        scriptPath: 'build-and-run-mcp-file.sh'
+        arguments:
+          - ${{ parameters.mcp_server_name }}
+
+#    - id: configure_agent
+#      name: Configuring Agent
+#      action: fetch:template
+#      input:
+#        url: ./../agent-skeletons/math-agent
+#        values:
+#          agent_name: ${{ parameters.agent_name }}
+#          agent_instruction: ${{ parameters.agent_instruction }}
+#          agent_startup_message: ${{ parameters.agent_startup_message }}
+#          openai_api_key: ${{ secrets.openai_api_key }}
+
+#    - id: test-connection-2
+#      name: Testing Connection 2
+#      action: tibco:call-platform-api
+#      input:
+#        baseUrl: ${{ parameters.dataplane_url }}
+#        endpoint: "public/v1/dp/flogoversions"
+
+# 2. Build the Agent
+    - id: build_mcp_server
+      name: Building MCP Server
+      action: tibco:call-platform-api
+      input:
+        baseUrl: ${{ parameters.dataplane_url }}
+        endpoint: "public/v1/dp/builds"
+        method: POST
+        postFile: 'build.zip'
+
+# buildZipFile
+
+    - id: log-build-id
+      name: Log Build ID
+      action: debug:log
+      input:
+        message: "Build ID: ${{ steps.build_mcp_server.output.platformResult.buildId }}"
+        listWorkspace: true
+
+
+    - id: wait_for_build
+      name: Wait for MCP Server Build
+      action: debug:wait
+      input:
+        seconds: 10
+
+
+# 3. Deploy the MCP Server
+    - id: deploy_mcp_server
+      name: Deploying MCP Server
+      action: tibco:call-platform-api
+      input:
+        baseUrl: ${{ parameters.dataplane_url }}
+        endpoint: "/public/v1/dp/builds/${{ steps.build_mcp_server.output.platformResult.buildId }}/deploy"
+        method: POST
+        platformInput:
+          appId: ''
+          buildId: ${{ steps.build_mcp_server.output.platformResult.buildId }}
+          eula: true
+          appName: ${{ parameters.mcp_server_name }}
+          tags:
+            - mcp_server
+          appProperties:
+            - name: API_Endpoint
+              type: string
+              value: 'https://v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro/tibco/apps/d2crh14g5cus73ebnp4g/ReceiveHTTPMessage/'
+          replicas: 1
+          resourceLimits:
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+          enableServiceMesh: false
+          enableAutoscaling: false
+
+    - id: log-app-id
+      name: Log APP ID
+      action: debug:log
+      input:
+        message: "APP ID: ${{ steps.deploy_mcp_server.output.platformResult.appId }}"
+        listWorkspace: true
+
+# 4. Make Agent Endpoint Public (Create Websocket)
+    - id: endpoint-public
+      name: Make Endpoint Visible
+      action: tibco:call-platform-api
+      input:
+        baseUrl: ${{ parameters.dataplane_url }}
+        endpoint: "/public/v1/dp/apps/${{ steps.deploy_mcp_server.output.platformResult.appId }}/endpoints/public"
+        method: POST
+        platformInput:
+          ingressClassName: nginx
+          ingressControllerName: nginx
+          ingressHostName: v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro
+          ingressTLSConfigs: []
+          portServicePathMappings:
+            - port: 3045
+              servicePath: "/tibco/apps/${{ steps.deploy_mcp_server.output.platformResult.appId }}/mcp"
+              isPublic: true
+              isServiceDiscoveryEnabled: true
+          customAnnotations: []
+
+
+# TODO: Register the agent
+#    - id: registerItem
+  #      name: Register Item
+  #      action: catalog:register
+  #      input:
+  #        optional: true
+  #        catalogInfoUrl: "https://github.com/TIBCO-Hub-Backstage/import-poc-hugo/blob/main/import-flow-bw5.yaml"
+
+
+  # TODO: (Next) 1. Create agent components (with websocket url, app deployment config, chat link)
+  # TODO: (Next) 2. Register the agent
+  # TODO: (Next) Add agent chat in the component page
+
+# TODO 5. Create output link to chatbot with wss url in parameter
+
+  output:
+    links:
+      - title: TIBCO
+        icon: catalog
+        url: "https://www.tibco.com/"
+#      - title: Open in catalog
+#        icon: catalog
+#        entityRef: ${{ steps.registerItem.output.entityRef }}
+      - title: Dataplane Details
+        icon: catalog
+        url: "https://tibcopm.us-west.my.tibco.com/cp/app/data-plane?dp_id=${{ parameters.dataplane_id }}"
+      - title: MCP Server Details
+        icon: dashboard
+        url: "https://tibcopm.us-west.my.tibco.com/cp/flogo/appdetails/endpoints?dp_id=${{ parameters.dataplane_id }}&capability_instance_id=${{ flogo_capability_instance_id }}&app_id=${{ steps.deploy_mcp_server.output.platformResult.appId }}"
+#      - title: Start Using Agent
+#        icon: chat
+#        url: "http://localhost:3000/tibco/hub/agentic-ai?agent_url=wss://${{ parameters.dataplane_host }}/tibco/apps/${{ steps.deploy_mcp_server.output.platformResult.appId }}/MathAgentTrigger/mathagent"
+#      - title: Agent Websocket URL
+#        icon: scaffolder
+#        url: "wss://${{ parameters.dataplane_host }}/tibco/apps/${{ steps.deploy_mcp_server.output.platformResult.appId }}/MathAgentTrigger/mathagent"
+

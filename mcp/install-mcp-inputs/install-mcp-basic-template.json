@@ -1,0 +1,11 @@
+{
+  "templateRef": "template:default/marketplace-mcp-basic-entry",
+  "values": {
+    "mcp_server_name": "@@MCP_NAME@@",
+    "api_to_generate_mcp_server_for": "api:default/get-user-api",
+    "dataplane_url": "https://v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro/tibco/flogo/v1753956342/",
+    "dataplane_host": "v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro",
+    "dataplane_id": "d25jvuctdkpc73bkq9ag",
+    "flogo_capability_instance_id": "d25k2j4tdkpc73bkq9fg"
+  }
+}

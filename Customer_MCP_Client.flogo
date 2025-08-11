@@ -1,0 +1,297 @@
+{
+  "imports": [
+    "github.com/project-flogo/flow",
+    "github.com/project-flogo/contrib/activity/noop",
+    "github.com/tibco/flogo-general/src/app/General/activity/log",
+    "github.com/tibco/flogo-general/src/app/General/activity/rest",
+    "github.com/tibco/flogo-general/src/app/General/activity/actreply",
+    "github.com/tibco/flogo-mcp/src/app/MCP/trigger/mcpserver",
+    "github.com/project-flogo/contrib/function/coerce"
+  ],
+  "name": "Flogo_project",
+  "description": "Flogo Project created with FDev",
+  "version": "1.0.0",
+  "type": "flogo:app",
+  "appModel": "1.1.1",
+  "tags": [],
+  "triggers": [
+    {
+      "ref": "#mcpserver",
+      "name": "flogo-mcp-mcpsever",
+      "description": "Simple REST Trigger",
+      "settings": {
+        "serverName": "MCP Server for GetUserByID",
+        "serverVersion": "1.0.0",
+        "serverType": "HTTP",
+        "serverPort": "=$property[\"MCP_Port\"]"
+      },
+      "id": "MCPTrigger",
+      "handlers": [
+        {
+          "description": "Flow for users/{userId} GET",
+          "settings": {
+            "handlerType": "Tool",
+            "handlerName": "users/{userId}",
+            "handlerDescription": "Get a user by ID_GET",
+            "resourceUri": ""
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "settings": {
+              "flowURI": "res://flow:users_userId_GET"
+            },
+            "input": {
+              "arguments": "=$.arguments"
+            },
+            "output": {
+              "toolResult": "=$.toolResult"
+            }
+          },
+          "schemas": {
+            "reply": {
+              "toolResult": {
+                "type": "json",
+                "value": "{\r\n    \"type\": \"object\",\r\n  \"properties\": {\r\n    \"data\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"error\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"success\": {\r\n      \"type\": \"boolean\"\r\n    }\r\n  }\r\n}",
+                "fe_metadata": "{\r\n    \"type\": \"object\",\r\n  \"properties\": {\r\n    \"data\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"error\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"success\": {\r\n      \"type\": \"boolean\"\r\n    }\r\n  }\r\n}"
+              },
+              "promptResult": {
+                "type": "json",
+                "value": "{\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"description\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"messages\": {\r\n      \"type\": \"array\",\r\n      \"items\": \r\n        {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"role\": {\r\n              \"type\": \"string\"\r\n            },\r\n            \"content\": {\r\n              \"type\": \"string\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"role\",\r\n            \"content\"\r\n          ]\r\n        }\r\n    },\r\n    \"success\": {\r\n      \"type\": \"boolean\"\r\n    },\r\n    \"error\": {\r\n      \"type\": \"string\"\r\n    }\r\n  }\r\n}",
+                "fe_metadata": "{\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"description\": {\r\n      \"type\": \"string\"\r\n    },\r\n    \"messages\": {\r\n      \"type\": \"array\",\r\n      \"items\": \r\n        {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"role\": {\r\n              \"type\": \"string\"\r\n            },\r\n            \"content\": {\r\n              \"type\": \"string\"\r\n            }\r\n          },\r\n          \"required\": [\r\n            \"role\",\r\n            \"content\"\r\n          ]\r\n        }\r\n    },\r\n    \"success\": {\r\n      \"type\": \"boolean\"\r\n    },\r\n    \"error\": {\r\n      \"type\": \"string\"\r\n    }\r\n  }\r\n}"
+              },
+              "resourceResult": {
+                "type": "json",
+                "value": "{\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n        \"textResourceContents\": {\r\n            \"type\": \"array\",\r\n            \"items\": {\r\n                \"type\": \"object\",\r\n                \"properties\": {\r\n                    \"uri\": {\r\n                        \"type\": \"string\"\r\n                    },\r\n                    \"text\": {\r\n                        \"type\": \"string\"\r\n                    },\r\n                    \"mimeType\": {\r\n                        \"type\": \"string\"\r\n                    }\r\n                },\r\n                \"required\": [\r\n                    \"text\",\r\n                    \"mimeType\"\r\n                ]\r\n            }\r\n        },\r\n        \"success\": {\r\n            \"type\": \"boolean\"\r\n        },\r\n        \"error\": {\r\n            \"type\": \"string\"\r\n        }\r\n    }\r\n}",
+                "fe_metadata": "{\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n        \"textResourceContents\": {\r\n            \"type\": \"array\",\r\n            \"items\": {\r\n                \"type\": \"object\",\r\n                \"properties\": {\r\n                    \"uri\": {\r\n                        \"type\": \"string\"\r\n                    },\r\n                    \"text\": {\r\n                        \"type\": \"string\"\r\n                    },\r\n                    \"mimeType\": {\r\n                        \"type\": \"string\"\r\n                    }\r\n                },\r\n                \"required\": [\r\n                    \"text\",\r\n                    \"mimeType\"\r\n                ]\r\n            }\r\n        },\r\n        \"success\": {\r\n            \"type\": \"boolean\"\r\n        },\r\n        \"error\": {\r\n            \"type\": \"string\"\r\n        }\r\n    }\r\n}"
+              }
+            },
+            "output": {
+              "arguments": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"string\"}}}",
+                "fe_metadata": "{\"userId\":\"dummy\"}"
+              }
+            }
+          },
+          "name": "users_userId_GET"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:users_userId_GET",
+      "data": {
+        "name": "users_userId_GET",
+        "description": "Flow for users/{userId} GET",
+        "links": [
+          {
+            "id": 1,
+            "from": "StartActivity",
+            "to": "Log_Input",
+            "type": "label",
+            "label": "StartActivity to Log_Input"
+          },
+          {
+            "id": 2,
+            "from": "Log_Input",
+            "to": "Call_API",
+            "type": "label",
+            "label": "Log_Input to Call_API"
+          },
+          {
+            "id": 3,
+            "from": "Call_API",
+            "to": "Log_API_Result",
+            "type": "label",
+            "label": "Call_API to Log_API_Result"
+          },
+          {
+            "id": 4,
+            "from": "Log_API_Result",
+            "to": "Return",
+            "type": "label",
+            "label": "Log_API_Result to Return"
+          }
+        ],
+        "tasks": [
+          {
+            "id": "StartActivity",
+            "name": "StartActivity",
+            "description": "NoOp Activity",
+            "activity": {
+              "ref": "#noop"
+            }
+          },
+          {
+            "id": "Log_Input",
+            "name": "Log_Input",
+            "description": "Log Input users/{userId} GET",
+            "activity": {
+              "ref": "#log",
+              "input": {
+                "Log Level": "INFO",
+                "flowInfo": false,
+                "message": "=coerce.toString($flow.arguments)"
+              }
+            }
+          },
+          {
+            "id": "Call_API",
+            "name": "Call_API",
+            "description": "Call API users/{userId} GET",
+            "settings": {
+              "retryOnError": {
+                "count": 0,
+                "interval": 0
+              }
+            },
+            "activity": {
+              "ref": "#rest",
+              "input": {
+                "enableASR": false,
+                "swagger": "spec://3bf2ec08-f7ac-4b6e-bfc7-9cdd36dfcdf1",
+                "authorization": false,
+                "serviceName": "",
+                "resourcePath": "/users/{userId}",
+                "Method": "GET",
+                "Uri": "=$property[\"API_Endpoint\"]",
+                "requestType": "application/json",
+                "Use certificate for verification": false,
+                "mutualAuth": false,
+                "disableSSLVerification": false,
+                "disableKeepAlives": false,
+                "followRedirects": true,
+                "Timeout": 0,
+                "pathParams": "=$flow.arguments"
+              },
+              "output": {
+                "configureResponseCodes": false,
+                "throwError": false,
+                "responseType": "application/json",
+                "responseOutput": "JSON Object"
+              },
+              "schemas": {
+                "input": {
+                  "pathParams": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{}}",
+                    "fe_metadata": "[]"
+                  },
+                  "headers": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{\"Accept\":{\"type\":\"string\",\"visible\":false},\"Accept-Charset\":{\"type\":\"string\",\"visible\":false},\"Accept-Encoding\":{\"type\":\"string\",\"visible\":false},\"Authorization\":{\"type\":\"string\",\"visible\":false},\"Content-Type\":{\"type\":\"string\",\"visible\":false},\"Content-Length\":{\"type\":\"string\",\"visible\":false},\"Connection\":{\"type\":\"string\",\"visible\":false},\"Cookie\":{\"type\":\"string\",\"visible\":false},\"Pragma\":{\"type\":\"string\",\"visible\":false}},\"required\":[]}",
+                    "fe_metadata": "[{\"parameterName\":\"Accept\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Charset\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Encoding\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false}, {\"parameterName\":\"Authorization\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Type\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Length\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Connection\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Cookie\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Pragma\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false}]"
+                  },
+                  "dynamicRequestHeaders": {
+                    "type": "json",
+                    "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"Header\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}},\"required\":[\"name\",\"value\"]}}}}",
+                    "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"Header\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}},\"required\":[\"name\",\"value\"]}}}}"
+                  }
+                },
+                "output": {
+                  "responseCodes": {
+                    "type": "json",
+                    "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"200\":{\"type\":\"object\",\"properties\":{\"content\":{\"type\":\"object\",\"properties\":{\"application/json\":{\"type\":\"object\",\"properties\":{\"schema\":{\"type\":\"object\",\"properties\":{\"properties\":{\"type\":\"object\",\"properties\":{\"createdAt\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"format\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"email\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"format\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"firstName\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"id\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"lastName\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"username\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}}},\"required\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"type\":{\"type\":\"string\"}}}}}}},\"description\":{\"type\":\"string\"}}},\"404\":{\"type\":\"object\",\"properties\":{\"content\":{\"type\":\"object\",\"properties\":{\"application/json\":{\"type\":\"object\",\"properties\":{\"schema\":{\"type\":\"object\",\"properties\":{\"properties\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"message\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}}},\"required\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"type\":{\"type\":\"string\"}}}}}}},\"description\":{\"type\":\"string\"}}},\"500\":{\"type\":\"object\",\"properties\":{\"content\":{\"type\":\"object\",\"properties\":{\"application/json\":{\"type\":\"object\",\"properties\":{\"schema\":{\"type\":\"object\",\"properties\":{\"properties\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}},\"message\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}}},\"required\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"type\":{\"type\":\"string\"}}}}}}},\"description\":{\"type\":\"string\"}}}}}",
+                    "fe_metadata": "{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"createdAt\":{\"description\":\"abc\",\"format\":\"abc\",\"type\":\"abc\"},\"email\":{\"description\":\"abc\",\"format\":\"abc\",\"type\":\"abc\"},\"firstName\":{\"description\":\"abc\",\"type\":\"abc\"},\"id\":{\"description\":\"abc\",\"type\":\"abc\"},\"lastName\":{\"description\":\"abc\",\"type\":\"abc\"},\"username\":{\"description\":\"abc\",\"type\":\"abc\"}},\"required\":[\"abc\"],\"type\":\"abc\"}}},\"description\":\"abc\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"abc\",\"type\":\"abc\"},\"message\":{\"description\":\"abc\",\"type\":\"abc\"}},\"required\":[\"abc\"],\"type\":\"abc\"}}},\"description\":\"abc\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"abc\",\"type\":\"abc\"},\"message\":{\"description\":\"abc\",\"type\":\"abc\"}},\"required\":[\"abc\"],\"type\":\"abc\"}}},\"description\":\"abc\"}}"
+                  },
+                  "responseCodesSchema": {
+                    "type": "json",
+                    "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"number\"},\"responseType\":{\"type\":\"string\"},\"responseSchema\":{\"type\":\"string\"}}}}",
+                    "fe_metadata": "[{\"code\":134,\"responseType\":\"abc\",\"responseSchema\":\"abc\"}]"
+                  },
+                  "headers": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{\"Accept\":{\"type\":\"string\",\"visible\":false},\"Accept-Charset\":{\"type\":\"string\",\"visible\":false},\"Accept-Encoding\":{\"type\":\"string\",\"visible\":false},\"Content-Type\":{\"type\":\"string\",\"visible\":false},\"Content-Length\":{\"type\":\"string\",\"visible\":false},\"Connection\":{\"type\":\"string\",\"visible\":false},\"Cookie\":{\"type\":\"string\",\"visible\":false},\"Pragma\":{\"type\":\"string\",\"visible\":false},\"Set-Cookie\":{\"type\":\"string\",\"visible\":false}},\"required\":[]}",
+                    "fe_metadata": "[{\"parameterName\":\"Accept\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Charset\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Encoding\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Type\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Length\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Connection\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Cookie\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Pragma\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Set-Cookie\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false}]"
+                  }
+                }
+              },
+              "feSchemaMap": {}
+            }
+          },
+          {
+            "id": "Log_API_Result",
+            "name": "Log_API_Result",
+            "description": "Log API Call for users/{userId} GET",
+            "activity": {
+              "ref": "#log",
+              "input": {
+                "Log Level": "INFO",
+                "flowInfo": false,
+                "message": "=coerce.toString($activity[Call_API])"
+              }
+            }
+          },
+          {
+            "id": "Return",
+            "name": "Return",
+            "description": "Reply to MCP Call for users/{userId} GET",
+            "activity": {
+              "ref": "#actreply",
+              "input": {
+                "reply": {
+                  "mapping": {
+                    "toolResult": {
+                      "data": "=coerce.toString($activity[Call_API].responseBody)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "fe_metadata": "eyJTdGFydEFjdGl2aXR5Ijp7IngiOjUwLCJ5Ijo0NX0sIkxvZ19JbnB1dCI6eyJ4IjoyNTAsInkiOjQ1fSwiQ2FsbF9BUEkiOnsieCI6NDUwLCJ5Ijo0NX0sIkxvZ19BUElfUmVzdWx0Ijp7IngiOjY1MCwieSI6NDV9LCJSZXR1cm4iOnsieCI6MjUwLCJ5IjoxOTV9fQ==",
+        "metadata": {
+          "input": [
+            {
+              "name": "arguments",
+              "type": "object"
+            }
+          ],
+          "output": [
+            {
+              "name": "toolResult",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"data\":{\"type\":\"string\"},\"error\":{\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}}"
+              }
+            }
+          ],
+          "fe_metadata": {
+            "input": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"arguments\":{\"type\":\"object\",\"properties\":{}}}}",
+            "output": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"toolResult\":{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"string\"},\"error\":{\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}}}}}"
+          }
+        }
+      }
+    }
+  ],
+  "properties": [
+    {
+      "name": "API_Endpoint",
+      "type": "string",
+      "value": "http://localhost:9999"
+    },
+    {
+      "name": "MCP_Port",
+      "type": "string",
+      "value": "3045"
+    }
+  ],
+  "specs": {
+    "3bf2ec08-f7ac-4b6e-bfc7-9cdd36dfcdf1": {
+      "id": "3bf2ec08-f7ac-4b6e-bfc7-9cdd36dfcdf1",
+      "name": "GetUserByID",
+      "type": "OpenAPI",
+      "version": "1.0.0",
+      "content": "ewogICJjb21wb25lbnRzIjogewogICAgInNjaGVtYXMiOiB7CiAgICAgICJzY2hlbWExIjogewogICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgImNyZWF0ZWRBdCI6IHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlRpbWVzdGFtcCB3aGVuIHRoZSB1c2VyIHdhcyBjcmVhdGVkIiwKICAgICAgICAgICAgImZvcm1hdCI6ICJkYXRlLXRpbWUiLAogICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICB9LAogICAgICAgICAgImVtYWlsIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGVtYWlsIGFkZHJlc3MiLAogICAgICAgICAgICAiZm9ybWF0IjogImVtYWlsIiwKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgfSwKICAgICAgICAgICJmaXJzdE5hbWUiOiB7CiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVc2VyJ3MgZmlyc3QgbmFtZSIsCiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgIH0sCiAgICAgICAgICAiaWQiOiB7CiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVbmlxdWUgaWRlbnRpZmllciBmb3IgdGhlIHVzZXIiLAogICAgICAgICAgICAidHlwZSI6ICJpbnRlZ2VyIgogICAgICAgICAgfSwKICAgICAgICAgICJsYXN0TmFtZSI6IHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBsYXN0IG5hbWUiLAogICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICB9LAogICAgICAgICAgInVzZXJuYW1lIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIHVzZXJuYW1lIiwKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgfQogICAgICAgIH0sCiAgICAgICAgInJlcXVpcmVkIjogWwogICAgICAgICAgImlkIiwKICAgICAgICAgICJ1c2VybmFtZSIsCiAgICAgICAgICAiZW1haWwiCiAgICAgICAgXSwKICAgICAgICAidHlwZSI6ICJvYmplY3QiCiAgICAgIH0sCiAgICAgICJzY2hlbWEyIjogewogICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgImNvZGUiOiB7CiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJFcnJvciBjb2RlIiwKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgfSwKICAgICAgICAgICJtZXNzYWdlIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiRXJyb3IgbWVzc2FnZSIsCiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAgICJjb2RlIiwKICAgICAgICAgICJtZXNzYWdlIgogICAgICAgIF0sCiAgICAgICAgInR5cGUiOiAib2JqZWN0IgogICAgICB9LAogICAgICAic2NoZW1hMyI6IHsKICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICJlbWFpbCI6IHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBlbWFpbCBhZGRyZXNzIiwKICAgICAgICAgICAgImZvcm1hdCI6ICJlbWFpbCIsCiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgIH0sCiAgICAgICAgICAiZmlyc3ROYW1lIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGZpcnN0IG5hbWUiLAogICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICB9LAogICAgICAgICAgImxhc3ROYW1lIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGxhc3QgbmFtZSIsCiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgICJ0eXBlIjogIm9iamVjdCIKICAgICAgfQogICAgfQogIH0sCiAgImluZm8iOiB7CiAgICAiZGVzY3JpcHRpb24iOiAiU2ltcGxlIFJFU1QgVHJpZ2dlciIsCiAgICAidGl0bGUiOiAiR2V0VXNlckJ5SUQiLAogICAgInZlcnNpb24iOiAiMS4wLjAiCiAgfSwKICAib3BlbmFwaSI6ICIzLjAuMCIsCiAgInBhdGhzIjogewogICAgIi91c2Vycy97dXNlcklkfSI6IHsKICAgICAgImRlbGV0ZSI6IHsKICAgICAgICAib3BlcmF0aW9uSWQiOiAiZGVsZXRlX3VzZXJzX3VzZXJJZCIsCiAgICAgICAgInBhcmFtZXRlcnMiOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJSZXF1ZXN0IHBhcmFtZXRlciIsCiAgICAgICAgICAgICJpbiI6ICJwYXRoIiwKICAgICAgICAgICAgIm5hbWUiOiAidXNlcklkIiwKICAgICAgICAgICAgInJlcXVpcmVkIjogdHJ1ZSwKICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAidHlwZSI6ICJudW1iZXIiCiAgICAgICAgICAgIH0KICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJyZXNwb25zZXMiOiB7CiAgICAgICAgICAiMjA0IjogewogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAidGV4dC9wbGFpbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICIiCiAgICAgICAgICB9LAogICAgICAgICAgIjQwNCI6IHsKICAgICAgICAgICAgImNvbnRlbnQiOiB7CiAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAiY29kZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJFcnJvciBjb2RlIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJtZXNzYWdlIjogewogICAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIkVycm9yIG1lc3NhZ2UiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgInJlcXVpcmVkIjogWwogICAgICAgICAgICAgICAgICAgICJjb2RlIiwKICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSIKICAgICAgICAgICAgICAgICAgXSwKICAgICAgICAgICAgICAgICAgInR5cGUiOiAib2JqZWN0IgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfSwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIiIKICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgICJzdW1tYXJ5IjogIkRlbGV0ZSBhIHVzZXJfREVMRVRFIgogICAgICB9LAogICAgICAiZ2V0IjogewogICAgICAgICJvcGVyYXRpb25JZCI6ICJnZXRfdXNlcnNfdXNlcklkIiwKICAgICAgICAicGFyYW1ldGVycyI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlJlcXVlc3QgcGFyYW1ldGVyIiwKICAgICAgICAgICAgImluIjogInBhdGgiLAogICAgICAgICAgICAibmFtZSI6ICJ1c2VySWQiLAogICAgICAgICAgICAicmVxdWlyZWQiOiB0cnVlLAogICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgfQogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgInJlc3BvbnNlcyI6IHsKICAgICAgICAgICIyMDAiOiB7CiAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICJhcHBsaWNhdGlvbi9qc29uIjogewogICAgICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAgICAgInByb3BlcnRpZXMiOiB7CiAgICAgICAgICAgICAgICAgICAgImNyZWF0ZWRBdCI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJUaW1lc3RhbXAgd2hlbiB0aGUgdXNlciB3YXMgY3JlYXRlZCIsCiAgICAgICAgICAgICAgICAgICAgICAiZm9ybWF0IjogImRhdGUtdGltZSIsCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICAiZW1haWwiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGVtYWlsIGFkZHJlc3MiLAogICAgICAgICAgICAgICAgICAgICAgImZvcm1hdCI6ICJlbWFpbCIsCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICAiZmlyc3ROYW1lIjogewogICAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBmaXJzdCBuYW1lIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJpZCI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVbmlxdWUgaWRlbnRpZmllciBmb3IgdGhlIHVzZXIiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAiaW50ZWdlciIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJsYXN0TmFtZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVc2VyJ3MgbGFzdCBuYW1lIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJ1c2VybmFtZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVc2VyJ3MgdXNlcm5hbWUiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgInJlcXVpcmVkIjogWwogICAgICAgICAgICAgICAgICAgICJpZCIsCiAgICAgICAgICAgICAgICAgICAgInVzZXJuYW1lIiwKICAgICAgICAgICAgICAgICAgICAiZW1haWwiCiAgICAgICAgICAgICAgICAgIF0sCiAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm9iamVjdCIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICIiCiAgICAgICAgICB9LAogICAgICAgICAgIjQwNCI6IHsKICAgICAgICAgICAgImNvbnRlbnQiOiB7CiAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAiY29kZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJFcnJvciBjb2RlIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJtZXNzYWdlIjogewogICAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIkVycm9yIG1lc3NhZ2UiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgInJlcXVpcmVkIjogWwogICAgICAgICAgICAgICAgICAgICJjb2RlIiwKICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSIKICAgICAgICAgICAgICAgICAgXSwKICAgICAgICAgICAgICAgICAgInR5cGUiOiAib2JqZWN0IgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfSwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIiIKICAgICAgICAgIH0sCiAgICAgICAgICAiNTAwIjogewogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgICAgICAgICAgICJjb2RlIjogewogICAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIkVycm9yIGNvZGUiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgIm1lc3NhZ2UiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiRXJyb3IgbWVzc2FnZSIsCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAicmVxdWlyZWQiOiBbCiAgICAgICAgICAgICAgICAgICAgImNvZGUiLAogICAgICAgICAgICAgICAgICAgICJtZXNzYWdlIgogICAgICAgICAgICAgICAgICBdLAogICAgICAgICAgICAgICAgICAidHlwZSI6ICJvYmplY3QiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9LAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiIgogICAgICAgICAgfQogICAgICAgIH0sCiAgICAgICAgInN1bW1hcnkiOiAiR2V0IGEgdXNlciBieSBJRF9HRVQiCiAgICAgIH0sCiAgICAgICJwdXQiOiB7CiAgICAgICAgIm9wZXJhdGlvbklkIjogInB1dF91c2Vyc191c2VySWQiLAogICAgICAgICJwYXJhbWV0ZXJzIjogWwogICAgICAgICAgewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiUmVxdWVzdCBwYXJhbWV0ZXIiLAogICAgICAgICAgICAiaW4iOiAicGF0aCIsCiAgICAgICAgICAgICJuYW1lIjogInVzZXJJZCIsCiAgICAgICAgICAgICJyZXF1aXJlZCI6IHRydWUsCiAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgInR5cGUiOiAibnVtYmVyIgogICAgICAgICAgICB9CiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAicmVxdWVzdEJvZHkiOiB7CiAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgICAgICAgICAiZW1haWwiOiB7CiAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBlbWFpbCBhZGRyZXNzIiwKICAgICAgICAgICAgICAgICAgICAiZm9ybWF0IjogImVtYWlsIiwKICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICJmaXJzdE5hbWUiOiB7CiAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBmaXJzdCBuYW1lIiwKICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICJsYXN0TmFtZSI6IHsKICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGxhc3QgbmFtZSIsCiAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgInR5cGUiOiAib2JqZWN0IgogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICAgfSwKICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICIiLAogICAgICAgICAgInJlcXVpcmVkIjogZmFsc2UKICAgICAgICB9LAogICAgICAgICJyZXNwb25zZXMiOiB7CiAgICAgICAgICAiMjAwIjogewogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgICAgICAgICAgICJjcmVhdGVkQXQiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVGltZXN0YW1wIHdoZW4gdGhlIHVzZXIgd2FzIGNyZWF0ZWQiLAogICAgICAgICAgICAgICAgICAgICAgImZvcm1hdCI6ICJkYXRlLXRpbWUiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgImVtYWlsIjogewogICAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBlbWFpbCBhZGRyZXNzIiwKICAgICAgICAgICAgICAgICAgICAgICJmb3JtYXQiOiAiZW1haWwiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgImZpcnN0TmFtZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVc2VyJ3MgZmlyc3QgbmFtZSIsCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICAiaWQiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVW5pcXVlIGlkZW50aWZpZXIgZm9yIHRoZSB1c2VyIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogImludGVnZXIiCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICAibGFzdE5hbWUiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGxhc3QgbmFtZSIsCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICAidXNlcm5hbWUiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIHVzZXJuYW1lIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAgICAgICAgICAgICAiaWQiLAogICAgICAgICAgICAgICAgICAgICJ1c2VybmFtZSIsCiAgICAgICAgICAgICAgICAgICAgImVtYWlsIgogICAgICAgICAgICAgICAgICBdLAogICAgICAgICAgICAgICAgICAidHlwZSI6ICJvYmplY3QiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9LAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiIgogICAgICAgICAgfSwKICAgICAgICAgICI0MDAiOiB7CiAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICJhcHBsaWNhdGlvbi9qc29uIjogewogICAgICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAgICAgInByb3BlcnRpZXMiOiB7CiAgICAgICAgICAgICAgICAgICAgImNvZGUiOiB7CiAgICAgICAgICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiRXJyb3IgY29kZSIsCiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJFcnJvciBtZXNzYWdlIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAgICAgICAgICAgICAiY29kZSIsCiAgICAgICAgICAgICAgICAgICAgIm1lc3NhZ2UiCiAgICAgICAgICAgICAgICAgIF0sCiAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm9iamVjdCIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICIiCiAgICAgICAgICB9LAogICAgICAgICAgIjQwNCI6IHsKICAgICAgICAgICAgImNvbnRlbnQiOiB7CiAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAiY29kZSI6IHsKICAgICAgICAgICAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJFcnJvciBjb2RlIiwKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJtZXNzYWdlIjogewogICAgICAgICAgICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIkVycm9yIG1lc3NhZ2UiLAogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgInJlcXVpcmVkIjogWwogICAgICAgICAgICAgICAgICAgICJjb2RlIiwKICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSIKICAgICAgICAgICAgICAgICAgXSwKICAgICAgICAgICAgICAgICAgInR5cGUiOiAib2JqZWN0IgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfSwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIiIKICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgICJzdW1tYXJ5IjogIlVwZGF0ZSBhIHVzZXJfUFVUIgogICAgICB9CiAgICB9CiAgfSwKICAic2VydmVycyI6IFsKICAgIHsKICAgICAgInVybCI6ICJodHRwczovL2xvY2FsaG9zdDo5OTk5LyIKICAgIH0sCiAgICB7CiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDo5OTk5LyIKICAgIH0KICBdCn0="
+    }
+  },
+  "connections": {},
+  "contrib": "W3sicmVmIjoiZ2l0aHViLmNvbS90aWJjby9mbG9nby1tY3Avc3JjL2FwcC9NQ1AiLCJpZCI6Ik1DUCIsInZlcnNpb24iOiIwLjkuMCIsInRhZyI6IjAuOS4wLWIxNSIsIm5hbWUiOiJNb2RlbCBDb250ZXh0IFByb3RvY29sIChNQ1ApIERldmVsb3BlciBQcmV2aWV3IiwiczNsb2NhdGlvbiI6IlRpYmNvL01DUCIsImlzVXNlckV4dGVuc2lvbiI6ZmFsc2V9LHsicmVmIjoiZ2l0aHViLmNvbS90aWJjby9mbG9nby1nZW5lcmFsL3NyYy9hcHAvR2VuZXJhbCIsImlkIjoiR2VuZXJhbCIsInZlcnNpb24iOiIxLjYuNyIsInRhZyI6IjEuNi43LWIwMyIsIm5hbWUiOiJHZW5lcmFsIiwiczNsb2NhdGlvbiI6IlRpYmNvL0dlbmVyYWwiLCJpc1VzZXJFeHRlbnNpb24iOmZhbHNlfV0=",
+  "metadata": {
+    "endpoints": [],
+    "flogoVersion": "2.25.7"
+  }
+}
