@@ -35,6 +35,11 @@ spec:
         - mcp_server_name
         - api_to_generate_mcp_server_for
       properties:
+        test_name:
+          title: TEST Name
+          type: string
+          description: My custom name for the component
+          ui:field: ValidateKebabCase
         mcp_server_name:
           title: The name of the MCP Server
           type: string
