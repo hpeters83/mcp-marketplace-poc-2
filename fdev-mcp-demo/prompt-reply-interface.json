@@ -1,0 +1,9 @@
+{
+    "input": {
+        "reply": {
+            "type": "json",
+            "value": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"promptResult\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"messages\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"role\":{\"type\":\"string\"},\"content\":{\"type\":\"string\"}},\"required\":[\"role\",\"content\"]}},\"success\":{\"type\":\"boolean\"},\"error\":{\"type\":\"string\"}}}},\"required\":[]}",
+            "fe_metadata": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"promptResult\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"messages\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"role\":{\"type\":\"string\"},\"content\":{\"type\":\"string\"}},\"required\":[\"role\",\"content\"]}},\"success\":{\"type\":\"boolean\"},\"error\":{\"type\":\"string\"}}}},\"required\":[]}"
+        }
+    }
+}

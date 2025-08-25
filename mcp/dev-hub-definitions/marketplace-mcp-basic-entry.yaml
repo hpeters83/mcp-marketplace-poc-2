@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: marketplace-mcp-basic-entry
-  title: MCP Server Builer (v1754928697)
+  title: MCP Server Builer (v1756139867)
   description: "This marketplace entry builds a Flogo MCP Server and deploys it to a TIBCO Dataplane."
   backstage.io/techdocs-ref: dir:.
   tibco.developer.hub/marketplace:
@@ -109,6 +109,11 @@ spec:
 #          title: Select Control Plane
 #          type: string
 #          description: Control Plane you want to deploy the MCP Server to
+        name:
+          title: Name
+          type: string
+          description: My custom name for the component
+          ui:field: ValidateKebabCase
         dataplane:
           title: Select Dataplane
           type: string

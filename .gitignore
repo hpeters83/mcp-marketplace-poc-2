@@ -156,3 +156,6 @@ vite.config.ts.timestamp-*
 build.zip
 
 flogo-engine
+/fdev-mcp-demo/test
+/fdev-mcp-demo/test.flogo
+/fdev-mcp-demo/test.flogotest

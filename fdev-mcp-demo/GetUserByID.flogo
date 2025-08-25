@@ -1,0 +1,912 @@
+{
+  "imports": [
+    "github.com/project-flogo/flow",
+    "github.com/project-flogo/contrib/activity/noop",
+    "github.com/tibco/flogo-general/src/app/General/activity/log",
+    "github.com/tibco/flogo-general/src/app/General/activity/httpresponse",
+    "github.com/project-flogo/contrib/activity/actreturn",
+    "github.com/tibco/flogo-general/src/app/General/trigger/rest",
+    "github.com/project-flogo/contrib/function/coerce"
+  ],
+  "name": "GetUserByID",
+  "description": "",
+  "version": "1.0.0",
+  "type": "flogo:app",
+  "appModel": "1.1.1",
+  "tags": [],
+  "triggers": [
+    {
+      "ref": "#rest",
+      "name": "tibco-wi-rest",
+      "description": "Simple REST Trigger",
+      "settings": {
+        "port": 9999,
+        "APISpecUpdate": true,
+        "swagger": "spec://dbf0cb4c",
+        "swaggerVersion": "v3",
+        "apiVersion": "1.0.0",
+        "secureConnection": false,
+        "serverKey": "",
+        "caCertificate": ""
+      },
+      "id": "ReceiveHTTPMessage",
+      "handlers": [
+        {
+          "description": "",
+          "settings": {
+            "APISpecPath": "/users/{userId}",
+            "Method": "GET",
+            "reqType": "application/json",
+            "Path": "/users/{userId}",
+            "OutputValidation": false
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "settings": {
+              "flowURI": "res://flow:Get_a_user_by_ID_GET"
+            },
+            "input": {
+              "pathParams": "=$.pathParams"
+            },
+            "output": {
+              "code": "=$.code",
+              "responseBody": "=$.responseBody"
+            }
+          },
+          "reply": {
+            "code": 200,
+            "configureResponseCodes": true,
+            "message": ""
+          },
+          "schemas": {
+            "reply": {
+              "responseBody": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}"
+              },
+              "responseCodesSchema": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"number\"},\"responseType\":{\"type\":\"string\"},\"responseSchema\":{\"type\":\"string\"}},\"required\":[\"code\",\"responseType\",\"responseSchema\"]}}",
+                "fe_metadata": "[{\"code\":200,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"id\\\":{\\\"type\\\":\\\"integer\\\",\\\"description\\\":\\\"Unique identifier for the user\\\"},\\\"username\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"User's username\\\"},\\\"email\\\":{\\\"type\\\":\\\"string\\\",\\\"format\\\":\\\"email\\\",\\\"description\\\":\\\"User's email address\\\"},\\\"firstName\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"User's first name\\\"},\\\"lastName\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"User's last name\\\"},\\\"createdAt\\\":{\\\"type\\\":\\\"string\\\",\\\"format\\\":\\\"date-time\\\",\\\"description\\\":\\\"Timestamp when the user was created\\\"}},\\\"required\\\":[\\\"id\\\",\\\"username\\\",\\\"email\\\"]}\"},{\"code\":404,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"code\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error code\\\"},\\\"message\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error message\\\"}},\\\"required\\\":[\\\"code\\\",\\\"message\\\"]}\"},{\"code\":500,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"code\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error code\\\"},\\\"message\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error message\\\"}},\\\"required\\\":[\\\"code\\\",\\\"message\\\"]}\"}]"
+              }
+            },
+            "output": {
+              "pathParams": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"number\"}},\"required\":[\"userId\"]}",
+                "fe_metadata": "[{\"parameterName\":\"userId\",\"type\":\"number\",\"required\":true}]"
+              },
+              "multipartFormData": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{}}"
+              },
+              "multipartForm": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{}}",
+                "fe_metadata": "[]"
+              }
+            }
+          },
+          "name": "Get_a_user_by_ID_GET"
+        },
+        {
+          "description": "",
+          "settings": {
+            "APISpecPath": "/users/{userId}",
+            "Method": "PUT",
+            "reqType": "application/json",
+            "Path": "/users/{userId}",
+            "OutputValidation": false
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "settings": {
+              "flowURI": "res://flow:Update_a_user_PUT"
+            },
+            "input": {
+              "pathParams": "=$.pathParams",
+              "body": "=$.body"
+            },
+            "output": {
+              "code": "=$.code",
+              "responseBody": "=$.responseBody"
+            }
+          },
+          "reply": {
+            "code": 200,
+            "configureResponseCodes": true,
+            "message": ""
+          },
+          "schemas": {
+            "reply": {
+              "responseBody": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}"
+              },
+              "responseCodesSchema": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"number\"},\"responseType\":{\"type\":\"string\"},\"responseSchema\":{\"type\":\"string\"}},\"required\":[\"code\",\"responseType\",\"responseSchema\"]}}",
+                "fe_metadata": "[{\"code\":200,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"id\\\":{\\\"type\\\":\\\"integer\\\",\\\"description\\\":\\\"Unique identifier for the user\\\"},\\\"username\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"User's username\\\"},\\\"email\\\":{\\\"type\\\":\\\"string\\\",\\\"format\\\":\\\"email\\\",\\\"description\\\":\\\"User's email address\\\"},\\\"firstName\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"User's first name\\\"},\\\"lastName\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"User's last name\\\"},\\\"createdAt\\\":{\\\"type\\\":\\\"string\\\",\\\"format\\\":\\\"date-time\\\",\\\"description\\\":\\\"Timestamp when the user was created\\\"}},\\\"required\\\":[\\\"id\\\",\\\"username\\\",\\\"email\\\"]}\"},{\"code\":400,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"code\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error code\\\"},\\\"message\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error message\\\"}},\\\"required\\\":[\\\"code\\\",\\\"message\\\"]}\"},{\"code\":404,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"code\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error code\\\"},\\\"message\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error message\\\"}},\\\"required\\\":[\\\"code\\\",\\\"message\\\"]}\"}]"
+              }
+            },
+            "output": {
+              "pathParams": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"number\"}},\"required\":[\"userId\"]}",
+                "fe_metadata": "[{\"parameterName\":\"userId\",\"type\":\"number\",\"required\":true}]"
+              },
+              "body": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"}}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"}}}"
+              },
+              "multipartFormData": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{}}"
+              },
+              "multipartForm": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{}}",
+                "fe_metadata": "[]"
+              }
+            }
+          },
+          "name": "Update_a_user_PUT"
+        },
+        {
+          "description": "",
+          "settings": {
+            "APISpecPath": "/users/{userId}",
+            "Method": "DELETE",
+            "reqType": "application/json",
+            "Path": "/users/{userId}",
+            "OutputValidation": false
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "settings": {
+              "flowURI": "res://flow:Delete_a_user_DELETE"
+            },
+            "input": {
+              "pathParams": "=$.pathParams",
+              "body": "=$.body"
+            },
+            "output": {
+              "code": "=$.code",
+              "responseBody": "=$.responseBody"
+            }
+          },
+          "reply": {
+            "code": 200,
+            "configureResponseCodes": true,
+            "message": ""
+          },
+          "schemas": {
+            "reply": {
+              "responseBody": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}"
+              },
+              "responseCodesSchema": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"number\"},\"responseType\":{\"type\":\"string\"},\"responseSchema\":{\"type\":\"string\"}},\"required\":[\"code\",\"responseType\"]}}",
+                "fe_metadata": "[{\"code\":204,\"responseType\":\"string\"},{\"code\":404,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"code\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error code\\\"},\\\"message\\\":{\\\"type\\\":\\\"string\\\",\\\"description\\\":\\\"Error message\\\"}},\\\"required\\\":[\\\"code\\\",\\\"message\\\"]}\"}]"
+              }
+            },
+            "output": {
+              "pathParams": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"number\"}},\"required\":[\"userId\"]}",
+                "fe_metadata": "[{\"parameterName\":\"userId\",\"type\":\"number\",\"required\":true}]"
+              },
+              "multipartFormData": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{}}"
+              },
+              "multipartForm": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{}}",
+                "fe_metadata": "[]"
+              }
+            }
+          },
+          "name": "Delete_a_user_DELETE"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:New_flow",
+      "data": {
+        "name": "New_flow",
+        "description": "",
+        "links": [],
+        "tasks": [
+          {
+            "id": "StartActivity",
+            "name": "StartActivity",
+            "description": "NoOp Activity",
+            "activity": {
+              "ref": "#noop"
+            }
+          }
+        ],
+        "fe_metadata": "eyJTdGFydEFjdGl2aXR5Ijp7IngiOjEwMCwieSI6MTAwfX0=",
+        "metadata": {
+          "input": [],
+          "output": [],
+          "fe_metadata": {}
+        }
+      }
+    },
+    {
+      "id": "flow:Get_a_user_by_ID_GET",
+      "data": {
+        "name": "Get a user by ID_GET",
+        "description": "",
+        "links": [
+          {
+            "id": 1,
+            "from": "Start",
+            "to": "LogMessage",
+            "type": "label",
+            "label": "Start to LogMessage"
+          },
+          {
+            "id": 2,
+            "from": "LogMessage",
+            "to": "ConfigureHTTPResponse",
+            "type": "label",
+            "label": "LogMessage to ConfigureHTTPResponse"
+          },
+          {
+            "id": 3,
+            "from": "ConfigureHTTPResponse",
+            "to": "Return",
+            "type": "label",
+            "label": "ConfigureHTTPResponse to Return"
+          }
+        ],
+        "tasks": [
+          {
+            "id": "Start",
+            "name": "Start",
+            "description": "Start",
+            "activity": {
+              "ref": "#noop"
+            }
+          },
+          {
+            "id": "LogMessage",
+            "name": "LogMessage",
+            "description": "Simple Log Message Activity",
+            "activity": {
+              "ref": "#log",
+              "input": {
+                "Log Level": "INFO",
+                "flowInfo": false,
+                "message": "=coerce.toString($flow.pathParams)",
+                "logLevel": ""
+              }
+            }
+          },
+          {
+            "id": "ConfigureHTTPResponse",
+            "name": "ConfigureHTTPResponse",
+            "description": "Configure HTTP Response Activity",
+            "activity": {
+              "ref": "#httpresponse",
+              "input": {
+                "trigger": "ReceiveHTTPMessage",
+                "responsecode": "200",
+                "input": {
+                  "mapping": {
+                    "body": {
+                      "@conditional": [
+                        {
+                          "$flow.pathParams.userId == 1234": {
+                            "id": 1234,
+                            "username": "Claude Shannon",
+                            "email": "claude@ai.com"
+                          }
+                        },
+                        {
+                          "@otherwise": {
+                            "id": 0,
+                            "username": "Unknown",
+                            "email": "unknown"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "schemas": {
+                "input": {
+                  "input": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}",
+                    "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}"
+                  }
+                },
+                "output": {
+                  "response": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}",
+                    "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}"
+                  }
+                }
+              },
+              "feSchemaMap": {}
+            }
+          },
+          {
+            "id": "Return",
+            "name": "Return",
+            "description": "Simple Return Activity",
+            "activity": {
+              "ref": "#actreturn",
+              "settings": {
+                "mappings": {
+                  "code": "=$activity[ConfigureHTTPResponse].code",
+                  "responseBody": "=$activity[ConfigureHTTPResponse].response"
+                }
+              }
+            }
+          }
+        ],
+        "fe_metadata": "eyJTdGFydCI6eyJ4Ijo1MCwieSI6NTB9LCJMb2dNZXNzYWdlIjp7IngiOjE3NywieSI6NDd9LCJDb25maWd1cmVIVFRQUmVzcG9uc2UiOnsieCI6NDEyLCJ5IjoxNTV9LCJSZXR1cm4iOnsieCI6NjAxLCJ5Ijo0MX19",
+        "metadata": {
+          "input": [
+            {
+              "name": "pathParams",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"userId\":{\"type\":\"number\"}}"
+              }
+            },
+            {
+              "name": "requestURI",
+              "type": "string"
+            },
+            {
+              "name": "method",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "code",
+              "type": "integer"
+            },
+            {
+              "name": "responseBody",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}"
+              }
+            }
+          ],
+          "fe_metadata": {
+            "input": "{\"type\":\"object\",\"title\":\"ReceiveHTTPMessage\",\"properties\":{\"pathParams\":{\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"number\"}},\"required\":[\"userId\"]},\"requestURI\":{\"type\":\"string\",\"required\":false},\"method\":{\"type\":\"string\",\"required\":false}}}",
+            "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"code\":{\"type\":\"integer\",\"required\":false},\"responseBody\":{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}},\"required\":[]}"
+          }
+        },
+        "explicitReply": true
+      }
+    },
+    {
+      "id": "flow:Update_a_user_PUT",
+      "data": {
+        "name": "Update a user_PUT",
+        "description": "",
+        "links": [
+          {
+            "id": 1,
+            "from": "Start",
+            "to": "ConfigureHTTPResponse",
+            "type": "label",
+            "label": "Start to ConfigureHTTPResponse"
+          },
+          {
+            "id": 2,
+            "from": "ConfigureHTTPResponse",
+            "to": "Return",
+            "type": "label",
+            "label": "ConfigureHTTPResponse to Return"
+          }
+        ],
+        "tasks": [
+          {
+            "id": "Start",
+            "name": "Start",
+            "description": "Start",
+            "activity": {
+              "ref": "#noop"
+            }
+          },
+          {
+            "id": "ConfigureHTTPResponse",
+            "name": "ConfigureHTTPResponse",
+            "description": "Configure HTTP Response Activity",
+            "activity": {
+              "ref": "#httpresponse",
+              "input": {
+                "trigger": "ReceiveHTTPMessage",
+                "responsecode": "200"
+              },
+              "schemas": {
+                "input": {
+                  "input": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}",
+                    "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}"
+                  }
+                },
+                "output": {
+                  "response": {
+                    "type": "json",
+                    "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}",
+                    "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\",\"description\":\"Unique identifier for the user\"},\"username\":{\"type\":\"string\",\"description\":\"User's username\"},\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\",\"description\":\"Timestamp when the user was created\"}},\"required\":[\"id\",\"username\",\"email\"]}}}"
+                  }
+                }
+              },
+              "feSchemaMap": {}
+            }
+          },
+          {
+            "id": "Return",
+            "name": "Return",
+            "description": "Simple Return Activity",
+            "activity": {
+              "ref": "#actreturn",
+              "settings": {
+                "mappings": {
+                  "code": "=$activity[ConfigureHTTPResponse].code",
+                  "responseBody": "=$activity[ConfigureHTTPResponse].response"
+                }
+              }
+            }
+          }
+        ],
+        "fe_metadata": "eyJTdGFydCI6eyJ4Ijo1MCwieSI6NTB9LCJDb25maWd1cmVIVFRQUmVzcG9uc2UiOnsieCI6MjUwLCJ5Ijo1MH0sIlJldHVybiI6eyJ4Ijo0NTAsInkiOjUwfX0=",
+        "metadata": {
+          "input": [
+            {
+              "name": "pathParams",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"userId\":{\"type\":\"string\"}}"
+              }
+            },
+            {
+              "name": "body",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"}}"
+              }
+            },
+            {
+              "name": "multipartFormData",
+              "type": "object"
+            },
+            {
+              "name": "requestURI",
+              "type": "string"
+            },
+            {
+              "name": "method",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "code",
+              "type": "integer"
+            },
+            {
+              "name": "responseBody",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}"
+              }
+            }
+          ],
+          "fe_metadata": {
+            "input": "{\"type\":\"object\",\"title\":\"ReceiveHTTPMessage\",\"properties\":{\"pathParams\":{\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"string\"}},\"required\":[\"userId\"]},\"body\":{\"type\":\"object\",\"properties\":{\"email\":{\"type\":\"string\",\"format\":\"email\",\"description\":\"User's email address\"},\"firstName\":{\"type\":\"string\",\"description\":\"User's first name\"},\"lastName\":{\"type\":\"string\",\"description\":\"User's last name\"}}},\"multipartFormData\":{\"type\":\"object\"},\"requestURI\":{\"type\":\"string\",\"required\":false},\"method\":{\"type\":\"string\",\"required\":false}}}",
+            "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"code\":{\"type\":\"integer\",\"required\":false},\"responseBody\":{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}},\"required\":[]}"
+          }
+        },
+        "explicitReply": true
+      }
+    },
+    {
+      "id": "flow:Delete_a_user_DELETE",
+      "data": {
+        "name": "Delete a user_DELETE",
+        "description": "",
+        "links": [
+          {
+            "id": 1,
+            "from": "Start",
+            "to": "ConfigureHTTPResponse",
+            "type": "label",
+            "label": "Start to ConfigureHTTPResponse"
+          },
+          {
+            "id": 2,
+            "from": "ConfigureHTTPResponse",
+            "to": "Return",
+            "type": "label",
+            "label": "ConfigureHTTPResponse to Return"
+          }
+        ],
+        "tasks": [
+          {
+            "id": "Start",
+            "name": "Start",
+            "description": "Start",
+            "activity": {
+              "ref": "#noop"
+            }
+          },
+          {
+            "id": "ConfigureHTTPResponse",
+            "name": "ConfigureHTTPResponse",
+            "description": "Configure HTTP Response Activity",
+            "activity": {
+              "ref": "#httpresponse",
+              "input": {
+                "trigger": "ReceiveHTTPMessage",
+                "responsecode": "204"
+              },
+              "schemas": {
+                "input": {
+                  "input": {
+                    "type": "json",
+                    "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"string\"}}}",
+                    "fe_metadata": "{\"body\":\"\"}"
+                  }
+                },
+                "output": {
+                  "response": {
+                    "type": "json",
+                    "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"string\"}}}",
+                    "fe_metadata": "{\"body\":\"\"}"
+                  }
+                }
+              },
+              "feSchemaMap": {}
+            }
+          },
+          {
+            "id": "Return",
+            "name": "Return",
+            "description": "Simple Return Activity",
+            "activity": {
+              "ref": "#actreturn",
+              "settings": {
+                "mappings": {
+                  "code": "=$activity[ConfigureHTTPResponse].code",
+                  "responseBody": "=$activity[ConfigureHTTPResponse].response"
+                }
+              }
+            }
+          }
+        ],
+        "fe_metadata": "eyJTdGFydCI6eyJ4Ijo1MCwieSI6NTB9LCJDb25maWd1cmVIVFRQUmVzcG9uc2UiOnsieCI6MjUwLCJ5Ijo1MH0sIlJldHVybiI6eyJ4Ijo0NTAsInkiOjUwfX0=",
+        "metadata": {
+          "input": [
+            {
+              "name": "pathParams",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"userId\":{\"type\":\"string\"}}"
+              }
+            },
+            {
+              "name": "multipartFormData",
+              "type": "object"
+            },
+            {
+              "name": "requestURI",
+              "type": "string"
+            },
+            {
+              "name": "method",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "code",
+              "type": "integer"
+            },
+            {
+              "name": "responseBody",
+              "type": "object",
+              "schema": {
+                "type": "json",
+                "value": "{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}"
+              }
+            }
+          ],
+          "fe_metadata": {
+            "input": "{\"type\":\"object\",\"title\":\"ReceiveHTTPMessage\",\"properties\":{\"pathParams\":{\"type\":\"object\",\"properties\":{\"userId\":{\"type\":\"string\"}},\"required\":[\"userId\"]},\"multipartFormData\":{\"type\":\"object\"},\"requestURI\":{\"type\":\"string\",\"required\":false},\"method\":{\"type\":\"string\",\"required\":false}}}",
+            "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"code\":{\"type\":\"integer\",\"required\":false},\"responseBody\":{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}},\"required\":[]}"
+          }
+        },
+        "explicitReply": true
+      }
+    }
+  ],
+  "properties": [],
+  "specs": {
+    "dbf0cb4c": {
+      "id": "dbf0cb4c",
+      "name": "simple_spec_path",
+      "type": "OpenAPI",
+      "content": "ewogICJvcGVuYXBpIjogIjMuMC4xIiwKICAiaW5mbyI6IHsKICAgICJ0aXRsZSI6ICJVc2VyIE1hbmFnZW1lbnQgQVBJIiwKICAgICJkZXNjcmlwdGlvbiI6ICJBIHNpbXBsZSBBUEkgZGVtb25zdHJhdGluZyBwYXRoIHBhcmFtZXRlcnMiLAogICAgInZlcnNpb24iOiAiMS4wLjAiCiAgfSwKICAic2VydmVycyI6IFsKICAgIHsKICAgICAgInVybCI6ICJodHRwczovL2FwaS5leGFtcGxlLmNvbS92MSIsCiAgICAgICJkZXNjcmlwdGlvbiI6ICJQcm9kdWN0aW9uIHNlcnZlciIKICAgIH0KICBdLAogICJwYXRocyI6IHsKICAgICIvdXNlcnMve3VzZXJJZH0iOiB7CiAgICAgICJnZXQiOiB7CiAgICAgICAgInN1bW1hcnkiOiAiR2V0IGEgdXNlciBieSBJRCIsCiAgICAgICAgImRlc2NyaXB0aW9uIjogIlJldHJpZXZlcyBhIHNwZWNpZmljIHVzZXIgYnkgdGhlaXIgdW5pcXVlIGlkZW50aWZpZXIiLAogICAgICAgICJwYXJhbWV0ZXJzIjogWwogICAgICAgICAgewogICAgICAgICAgICAibmFtZSI6ICJ1c2VySWQiLAogICAgICAgICAgICAiaW4iOiAicGF0aCIsCiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJUaGUgdW5pcXVlIGlkZW50aWZpZXIgb2YgdGhlIHVzZXIiLAogICAgICAgICAgICAicmVxdWlyZWQiOiB0cnVlLAogICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICJ0eXBlIjogImludGVnZXIiLAogICAgICAgICAgICAgICJleGFtcGxlIjogMTIzNDUKICAgICAgICAgICAgfQogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgInJlc3BvbnNlcyI6IHsKICAgICAgICAgICIyMDAiOiB7CiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJTdWNjZXNzZnVsIHJlc3BvbnNlIiwKICAgICAgICAgICAgImNvbnRlbnQiOiB7CiAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgICAiJHJlZiI6ICIjL2NvbXBvbmVudHMvc2NoZW1hcy9Vc2VyIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICAgfSwKICAgICAgICAgICI0MDQiOiB7CiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6ICJVc2VyIG5vdCBmb3VuZCIsCiAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICJhcHBsaWNhdGlvbi9qc29uIjogewogICAgICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAgICAgIiRyZWYiOiAiIy9jb21wb25lbnRzL3NjaGVtYXMvRXJyb3IiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9LAogICAgICAgICAgIjUwMCI6IHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIkludGVybmFsIHNlcnZlciBlcnJvciIsCiAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICJhcHBsaWNhdGlvbi9qc29uIjogewogICAgICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAgICAgIiRyZWYiOiAiIy9jb21wb25lbnRzL3NjaGVtYXMvRXJyb3IiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICB9LAogICAgICAicHV0IjogewogICAgICAgICJzdW1tYXJ5IjogIlVwZGF0ZSBhIHVzZXIiLAogICAgICAgICJkZXNjcmlwdGlvbiI6ICJVcGRhdGVzIGFuIGV4aXN0aW5nIHVzZXIncyBpbmZvcm1hdGlvbiIsCiAgICAgICAgInBhcmFtZXRlcnMiOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJuYW1lIjogInVzZXJJZCIsCiAgICAgICAgICAgICJpbiI6ICJwYXRoIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlRoZSB1bmlxdWUgaWRlbnRpZmllciBvZiB0aGUgdXNlciIsCiAgICAgICAgICAgICJyZXF1aXJlZCI6IHRydWUsCiAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgInR5cGUiOiAiaW50ZWdlciIKICAgICAgICAgICAgfQogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgInJlcXVlc3RCb2R5IjogewogICAgICAgICAgInJlcXVpcmVkIjogdHJ1ZSwKICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgIiRyZWYiOiAiIy9jb21wb25lbnRzL3NjaGVtYXMvVXNlclVwZGF0ZSIKICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgIH0KICAgICAgICB9LAogICAgICAgICJyZXNwb25zZXMiOiB7CiAgICAgICAgICAiMjAwIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlciBzdWNjZXNzZnVsbHkgdXBkYXRlZCIsCiAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICJhcHBsaWNhdGlvbi9qc29uIjogewogICAgICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAgICAgIiRyZWYiOiAiIy9jb21wb25lbnRzL3NjaGVtYXMvVXNlciIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgIH0sCiAgICAgICAgICAiNDAwIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiSW52YWxpZCByZXF1ZXN0IiwKICAgICAgICAgICAgImNvbnRlbnQiOiB7CiAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgICAiJHJlZiI6ICIjL2NvbXBvbmVudHMvc2NoZW1hcy9FcnJvciIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgIH0sCiAgICAgICAgICAiNDA0IjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlciBub3QgZm91bmQiLAogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICIkcmVmIjogIiMvY29tcG9uZW50cy9zY2hlbWFzL0Vycm9yIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfSwKICAgICAgImRlbGV0ZSI6IHsKICAgICAgICAic3VtbWFyeSI6ICJEZWxldGUgYSB1c2VyIiwKICAgICAgICAiZGVzY3JpcHRpb24iOiAiUmVtb3ZlcyBhIHVzZXIgZnJvbSB0aGUgc3lzdGVtIiwKICAgICAgICAicGFyYW1ldGVycyI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgIm5hbWUiOiAidXNlcklkIiwKICAgICAgICAgICAgImluIjogInBhdGgiLAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVGhlIHVuaXF1ZSBpZGVudGlmaWVyIG9mIHRoZSB1c2VyIiwKICAgICAgICAgICAgInJlcXVpcmVkIjogdHJ1ZSwKICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAidHlwZSI6ICJpbnRlZ2VyIiwKICAgICAgICAgICAgICAiZm9ybWF0IjogImludDY0IgogICAgICAgICAgICB9CiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAicmVzcG9uc2VzIjogewogICAgICAgICAgIjIwNCI6IHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIgc3VjY2Vzc2Z1bGx5IGRlbGV0ZWQiCiAgICAgICAgICB9LAogICAgICAgICAgIjQwNCI6IHsKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIgbm90IGZvdW5kIiwKICAgICAgICAgICAgImNvbnRlbnQiOiB7CiAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAic2NoZW1hIjogewogICAgICAgICAgICAgICAgICAiJHJlZiI6ICIjL2NvbXBvbmVudHMvc2NoZW1hcy9FcnJvciIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KICAgIH0KICB9LAogICJjb21wb25lbnRzIjogewogICAgInNjaGVtYXMiOiB7CiAgICAgICJVc2VyIjogewogICAgICAgICJ0eXBlIjogIm9iamVjdCIsCiAgICAgICAgInByb3BlcnRpZXMiOiB7CiAgICAgICAgICAiaWQiOiB7CiAgICAgICAgICAgICJ0eXBlIjogImludGVnZXIiLAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVW5pcXVlIGlkZW50aWZpZXIgZm9yIHRoZSB1c2VyIgogICAgICAgICAgfSwKICAgICAgICAgICJ1c2VybmFtZSI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyB1c2VybmFtZSIKICAgICAgICAgIH0sCiAgICAgICAgICAiZW1haWwiOiB7CiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIsCiAgICAgICAgICAgICJmb3JtYXQiOiAiZW1haWwiLAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGVtYWlsIGFkZHJlc3MiCiAgICAgICAgICB9LAogICAgICAgICAgImZpcnN0TmFtZSI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBmaXJzdCBuYW1lIgogICAgICAgICAgfSwKICAgICAgICAgICJsYXN0TmFtZSI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBsYXN0IG5hbWUiCiAgICAgICAgICB9LAogICAgICAgICAgImNyZWF0ZWRBdCI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImZvcm1hdCI6ICJkYXRlLXRpbWUiLAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVGltZXN0YW1wIHdoZW4gdGhlIHVzZXIgd2FzIGNyZWF0ZWQiCiAgICAgICAgICB9CiAgICAgICAgfSwKICAgICAgICAicmVxdWlyZWQiOiBbCiAgICAgICAgICAiaWQiLAogICAgICAgICAgInVzZXJuYW1lIiwKICAgICAgICAgICJlbWFpbCIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJVc2VyVXBkYXRlIjogewogICAgICAgICJ0eXBlIjogIm9iamVjdCIsCiAgICAgICAgInByb3BlcnRpZXMiOiB7CiAgICAgICAgICAiZW1haWwiOiB7CiAgICAgICAgICAgICJ0eXBlIjogInN0cmluZyIsCiAgICAgICAgICAgICJmb3JtYXQiOiAiZW1haWwiLAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiVXNlcidzIGVtYWlsIGFkZHJlc3MiCiAgICAgICAgICB9LAogICAgICAgICAgImZpcnN0TmFtZSI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBmaXJzdCBuYW1lIgogICAgICAgICAgfSwKICAgICAgICAgICJsYXN0TmFtZSI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIlVzZXIncyBsYXN0IG5hbWUiCiAgICAgICAgICB9CiAgICAgICAgfQogICAgICB9LAogICAgICAiRXJyb3IiOiB7CiAgICAgICAgInR5cGUiOiAib2JqZWN0IiwKICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICJjb2RlIjogewogICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciLAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiRXJyb3IgY29kZSIKICAgICAgICAgIH0sCiAgICAgICAgICAibWVzc2FnZSI6IHsKICAgICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICAgImRlc2NyaXB0aW9uIjogIkVycm9yIG1lc3NhZ2UiCiAgICAgICAgICB9CiAgICAgICAgfSwKICAgICAgICAicmVxdWlyZWQiOiBbCiAgICAgICAgICAiY29kZSIsCiAgICAgICAgICAibWVzc2FnZSIKICAgICAgICBdCiAgICAgIH0KICAgIH0KICB9Cn0=",
+      "version": "1.0.0"
+    }
+  },
+  "connections": {},
+  "contrib": "W3sicmVmIjoiZ2l0aHViLmNvbS90aWJjby9mbG9nby1nZW5lcmFsL3NyYy9hcHAvR2VuZXJhbCIsImlkIjoiR2VuZXJhbCIsInZlcnNpb24iOiIxLjYuNyIsInRhZyI6IjEuNi43LWIwMyIsIm5hbWUiOiJHZW5lcmFsIiwiczNsb2NhdGlvbiI6IlRpYmNvL0dlbmVyYWwiLCJpc1VzZXJFeHRlbnNpb24iOmZhbHNlfV0=",
+  "metadata": {
+    "endpoints": [
+      {
+        "protocol": "http",
+        "port": "9999",
+        "spec": {
+          "name": "GetUserByID",
+          "version": "1.0.0"
+        },
+        "title": "ReceiveHTTPMessage",
+        "swagger": {
+          "openapi": "3.0.0",
+          "info": {
+            "title": "GetUserByID",
+            "version": "1.0.0",
+            "description": "Simple REST Trigger"
+          },
+          "paths": {
+            "/users/{userId}": {
+              "get": {
+                "summary": "Get a user by ID_GET",
+                "operationId": "get_users_userId",
+                "parameters": [
+                  {
+                    "name": "userId",
+                    "in": "path",
+                    "description": "Request parameter",
+                    "required": true,
+                    "schema": {
+                      "type": "number"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema1"
+                        }
+                      }
+                    }
+                  },
+                  "404": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema2"
+                        }
+                      }
+                    }
+                  },
+                  "500": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema2"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "put": {
+                "summary": "Update a user_PUT",
+                "operationId": "put_users_userId",
+                "parameters": [
+                  {
+                    "name": "userId",
+                    "in": "path",
+                    "description": "Request parameter",
+                    "required": true,
+                    "schema": {
+                      "type": "number"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema1"
+                        }
+                      }
+                    }
+                  },
+                  "400": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema2"
+                        }
+                      }
+                    }
+                  },
+                  "404": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema2"
+                        }
+                      }
+                    }
+                  }
+                },
+                "requestBody": {
+                  "description": "",
+                  "required": false,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/schema3"
+                      }
+                    }
+                  }
+                }
+              },
+              "delete": {
+                "summary": "Delete a user_DELETE",
+                "operationId": "delete_users_userId",
+                "parameters": [
+                  {
+                    "name": "userId",
+                    "in": "path",
+                    "description": "Request parameter",
+                    "required": true,
+                    "schema": {
+                      "type": "number"
+                    }
+                  }
+                ],
+                "responses": {
+                  "204": {
+                    "description": "",
+                    "content": {
+                      "text/plain": {
+                        "schema": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "404": {
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "components": {
+            "schemas": {
+              "schema1": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Unique identifier for the user"
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "User's username"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "User's email address"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "description": "User's first name"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "description": "User's last name"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Timestamp when the user was created"
+                  }
+                },
+                "required": [
+                  "id",
+                  "username",
+                  "email"
+                ]
+              },
+              "schema2": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Error code"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Error message"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ]
+              },
+              "schema3": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "User's email address"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "description": "User's first name"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "description": "User's last name"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "flogoVersion": "2.25.7"
+  }
+}

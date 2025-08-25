@@ -1,0 +1,15 @@
+contrib:
+  - ref: github.com/tibco/flogo-mcp/src/app/MCP
+    id: MCP
+    version: 0.9.0
+    tag: 0.9.0-b15
+    name: Model Context Protocol (MCP) Developer Preview
+    s3location: Tibco/MCP
+    isUserExtension: false
+  - ref: github.com/tibco/flogo-general/src/app/General
+    id: General
+    version: 1.6.7
+    tag: 1.6.7-b03
+    name: General
+    s3location: Tibco/General
+    isUserExtension: false

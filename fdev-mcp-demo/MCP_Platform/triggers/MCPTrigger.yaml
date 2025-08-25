@@ -1,0 +1,6064 @@
+ref: "#mcpserver"
+name: flogo-mcp-mcpsever
+description: Trigger created with FDev
+settings:
+  serverName: MCP Server for TIBCO Platform APIs
+  serverVersion: 1.0.0
+  serverType: HTTP
+  serverPort: =$property["MCP_Port"]
+id: MCPTrigger
+handlers:
+  - description: Flow for cp/api/v1/data-planes GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes
+      handlerDescription: Get data planes
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/data-planes_GET
+  - description: Flow for cp/api/v1/data-planes/status GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/status
+      handlerDescription: Get Data Planes status
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/status_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/data-planes/status_GET
+  - description: Flow for cp/api/v1/data-planes/{dataPlaneId}/status GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/status
+      handlerDescription: Get Data Plane status
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/status_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/status_GET
+  - description: Flow for cp/api/v1/data-planes/{dataPlaneId}/commands/{operation} GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/commands/{operation}
+      handlerDescription: Get Data Plane commands
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/commands/{operation}_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"},"operation":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy","operation":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/commands/{operation}_GET
+  - description: Flow for cp/api/v1/data-planes/{dataPlaneId} GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}
+      handlerDescription: Get data plane details of the mentioned data plane id
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId_GET
+  - description: Flow for cp/api/v1/data-planes/{dataPlaneId}/apps GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/apps
+      handlerDescription: Get app details deployed on a data plane
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/apps_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/apps_GET
+  - description: Flow for cp/api/v1/apps GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/apps
+      handlerDescription: Get app details deployed on a subscription
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/apps_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/apps_GET
+  - description: Flow for cp/api/v1/apps/{appId} GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/apps/{appId}
+      handlerDescription: Get app details by ID on a subscription
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/apps/appId_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"appId":{"type":"string"}}}'
+          fe_metadata: '{"appId":"dummy"}'
+    name: cp_api/v1/apps/appId_GET
+  - description: Flow for cp/api/v1/resources GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/resources
+      handlerDescription: Get Resources
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/resources_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/resources_GET
+  - description: Flow for cp/api/v1/resources/instances GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/resources/instances
+      handlerDescription: Get All Resource Instances
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/resources/instances_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/resources/instances_GET
+  - description: Flow for cp/api/v1/data-planes/{dataPlaneId}/resources/instances GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/resources/instances
+      handlerDescription: Get Data Plane Resource Instances
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/resources/instances_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/resources/instances_GET
+  - description: Flow for cp/api/v1/resources/instances/{resourceInstanceId} GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/resources/instances/{resourceInstanceId}
+      handlerDescription: Get Resource Instance details
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/resources/instances/resourceInstanceId_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"resourceInstanceId":{"type":"string"}}}'
+          fe_metadata: '{"resourceInstanceId":"dummy"}'
+    name: cp_api/v1/resources/instances/resourceInstanceId_GET
+  - description: Flow for cp/api/v1/capabilities GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/capabilities
+      handlerDescription: Get capabilities list
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/capabilities_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/capabilities_GET
+  - description: Flow for cp/api/v1/capabilities/instances GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/capabilities/instances
+      handlerDescription: Get all capability instances details in a subscription
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/capabilities/instances_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+    name: cp_api/v1/capabilities/instances_GET
+  - description: Flow for cp/api/v1/data-planes/{dataPlaneId}/capabilities/instances GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/capabilities/instances
+      handlerDescription: Get all capability instances details in a data plane
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/capabilities/instances_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/capabilities/instances_GET
+  - description: Flow for
+      cp/api/v1/data-planes/{dataPlaneId}/capabilities-instances/status GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/capabilities-instances/status
+      handlerDescription: Get capabilities instances status
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/capabilities-instances/status_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/capabilities-instances/status_GET
+  - description: Flow for
+      cp/api/v1/data-planes/{dataPlaneId}/capabilities/instances/{capabilityInstanceId}/status
+      GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/capabilities/instances/{capabilityInstanceId}/status
+      handlerDescription: Get capability instance status
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/capabilities/instances/{capabilityInstanceId}/status_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"},"capabilityInstanceId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy","capabilityInstanceId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/capabilities/instances/{capabilityInstanceId}/status_GET
+  - description: Flow for
+      cp/api/v1/data-planes/{dataPlaneId}/capabilities/instances/{capabilityInstanceId}
+      GET
+    settings:
+      handlerType: Tool
+      handlerName: cp/api/v1/data-planes/{dataPlaneId}/capabilities/instances/{capabilityInstanceId}
+      handlerDescription: Get capability instance details in a data plane
+      resourceUri: ""
+    action:
+      ref: github.com/project-flogo/flow
+      settings:
+        flowURI: res://flow:cp_api/v1/data-planes/dataPlaneId/capabilities/instances/{capabilityInstanceId}_GET
+      input:
+        arguments: =$.arguments
+      output:
+        toolResult: =$.toolResult
+    schemas:
+      reply:
+        toolResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"data\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        promptResult:
+          type: json
+          value: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \  \"type\": \"object\",\r
+
+            \  \"properties\": {\r
+
+            \    \"description\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    },\r
+
+            \    \"messages\": {\r
+
+            \      \"type\": \"array\",\r
+
+            \      \"items\": \r
+
+            \        {\r
+
+            \          \"type\": \"object\",\r
+
+            \          \"properties\": {\r
+
+            \            \"role\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            },\r
+
+            \            \"content\": {\r
+
+            \              \"type\": \"string\"\r
+
+            \            }\r
+
+            \          },\r
+
+            \          \"required\": [\r
+
+            \            \"role\",\r
+
+            \            \"content\"\r
+
+            \          ]\r
+
+            \        }\r
+
+            \    },\r
+
+            \    \"success\": {\r
+
+            \      \"type\": \"boolean\"\r
+
+            \    },\r
+
+            \    \"error\": {\r
+
+            \      \"type\": \"string\"\r
+
+            \    }\r
+
+            \  }\r
+
+            }"
+        resourceResult:
+          type: json
+          value: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+          fe_metadata: "{\r
+
+            \    \"type\": \"object\",\r
+
+            \    \"properties\": {\r
+
+            \        \"textResourceContents\": {\r
+
+            \            \"type\": \"array\",\r
+
+            \            \"items\": {\r
+
+            \                \"type\": \"object\",\r
+
+            \                \"properties\": {\r
+
+            \                    \"uri\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"text\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    },\r
+
+            \                    \"mimeType\": {\r
+
+            \                        \"type\": \"string\"\r
+
+            \                    }\r
+
+            \                },\r
+
+            \                \"required\": [\r
+
+            \                    \"text\",\r
+
+            \                    \"mimeType\"\r
+
+            \                ]\r
+
+            \            }\r
+
+            \        },\r
+
+            \        \"success\": {\r
+
+            \            \"type\": \"boolean\"\r
+
+            \        },\r
+
+            \        \"error\": {\r
+
+            \            \"type\": \"string\"\r
+
+            \        }\r
+
+            \    }\r
+
+            }"
+      output:
+        arguments:
+          type: json
+          value: '{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"dataPlaneId":{"type":"string"},"capabilityInstanceId":{"type":"string"}}}'
+          fe_metadata: '{"dataPlaneId":"dummy","capabilityInstanceId":"dummy"}'
+    name: cp_api/v1/data-planes/dataPlaneId/capabilities/instances/{capabilityInstanceId}_GET

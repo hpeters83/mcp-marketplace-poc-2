@@ -1,0 +1,9 @@
+{
+  "0b275ec8-d279-4050-80ac-bad7097a194c": {
+    "id": "0b275ec8-d279-4050-80ac-bad7097a194c",
+    "name": "TIBCO Platform APIs",
+    "type": "OpenAPI",
+    "version": "1.0.0",
+    "content": "FILE_B64:TIBCO_Platform_APIs.spec.json"
+  }
+}

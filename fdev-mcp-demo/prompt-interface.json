@@ -1,0 +1,22 @@
+{
+    "input": [
+        {
+            "name": "arguments",
+            "type": "any"
+        }
+    ],
+    "output": [
+        {
+            "name": "promptResult",
+            "type": "object",
+            "schema": {
+                "type": "json",
+                "value": "{\"description\":{\"type\":\"string\"},\"messages\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"role\":{\"type\":\"string\"},\"content\":{\"type\":\"string\"}},\"required\":[\"role\",\"content\"]}},\"success\":{\"type\":\"boolean\"},\"error\":{\"type\":\"string\"}}"
+            }
+        }
+    ],
+    "fe_metadata": {
+        "input": "{\"type\":\"object\",\"title\":\"MCPTrigger\",\"properties\":{\"arguments\":{\"type\":\"any\",\"required\":false}}}",
+        "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"promptResult\":{\"type\":\"object\",\"properties\":{\"description\":{\"type\":\"string\"},\"messages\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"role\":{\"type\":\"string\"},\"content\":{\"type\":\"string\"}},\"required\":[\"role\",\"content\"]}},\"success\":{\"type\":\"boolean\"},\"error\":{\"type\":\"string\"}}}},\"required\":[]}"
+    }
+}

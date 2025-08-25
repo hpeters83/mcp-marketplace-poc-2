@@ -109,6 +109,11 @@ spec:
 #          title: Select Control Plane
 #          type: string
 #          description: Control Plane you want to deploy the MCP Server to
+        name:
+          title: Name
+          type: string
+          description: My custom name for the component
+          ui:field: ValidateKebabCase
         dataplane:
           title: Select Dataplane
           type: string

@@ -1,0 +1,34 @@
+imports: FILE_EMBED:imports.yaml
+name: Flogo_project
+description: Flogo Project created with FDev
+version: 1.0.0
+type: flogo:decomposed_project
+appModel: 1.1.1
+tags: []
+triggers:
+  - FILE:triggers/MCPTrigger.yaml
+resources:
+  - FILE:flows/cp_apiv1data-planes_GET.yaml
+  - FILE:flows/cp_apiv1data-planesstatus_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdstatus_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdcommands{operation}_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneId_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdapps_GET.yaml
+  - FILE:flows/cp_apiv1apps_GET.yaml
+  - FILE:flows/cp_apiv1appsappId_GET.yaml
+  - FILE:flows/cp_apiv1resources_GET.yaml
+  - FILE:flows/cp_apiv1resourcesinstances_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdresourcesinstances_GET.yaml
+  - FILE:flows/cp_apiv1resourcesinstancesresourceInstanceId_GET.yaml
+  - FILE:flows/cp_apiv1capabilities_GET.yaml
+  - FILE:flows/cp_apiv1capabilitiesinstances_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilitiesinstances_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilities-instancesstatus_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilitiesinstances{capabilityInstanceId}status_GET.yaml
+  - FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilitiesinstances{capabilityInstanceId}_GET.yaml
+properties: FILE_EMBED:properties.yaml
+specs:
+  0b275ec8-d279-4050-80ac-bad7097a194c: FILE_EMBED:specs/TIBCO_Platform_APIs.yaml
+connections: {}
+contrib: FILE_DO_EMBED_B64:contrib.yaml
+metadata: FILE_EMBED:metadata.yaml

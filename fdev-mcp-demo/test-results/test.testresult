@@ -1,0 +1,92 @@
+{
+    "report": {
+        "suites": [
+            {
+                "suiteName": "Selected Test Cases",
+                "testCases": [
+                    {
+                        "testName": "test",
+                        "flowName": "users_userId_GET",
+                        "activities": [
+                            {
+                                "name": "StartActivity",
+                                "output": null
+                            },
+                            {
+                                "name": "Log_Input",
+                                "input": {
+                                    "Log Level": "INFO",
+                                    "flowInfo": false,
+                                    "message": "null"
+                                },
+                                "output": null
+                            },
+                            {
+                                "name": "Call_API",
+                                "input": {
+                                    "Method": "GET",
+                                    "Timeout": 0,
+                                    "Uri": "http://localhost:9999",
+                                    "Use certificate for verification": false,
+                                    "authorization": false,
+                                    "disableKeepAlives": false,
+                                    "disableSSLVerification": false,
+                                    "enableASR": false,
+                                    "followRedirects": true,
+                                    "mutualAuth": false,
+                                    "pathParams": null,
+                                    "requestType": "application/json",
+                                    "resourcePath": "/users/{userId}",
+                                    "serviceName": "",
+                                    "swagger": "spec://288c0e7d-cb18-4112-96b8-b22295da6726"
+                                },
+                                "output": null,
+                                "error": {
+                                    "activity": "Call_API",
+                                    "code": "",
+                                    "data": null,
+                                    "message": "unable to deserialize response to json due to error: [invalid character 'F' looking for beginning of value]",
+                                    "type": "unknown"
+                                }
+                            }
+                        ],
+                        "links": [
+                            {
+                                "linkName": "StartActivity to Log_Input",
+                                "from": "StartActivity",
+                                "to": "Log_Input"
+                            },
+                            {
+                                "linkName": "Log_Input to Call_API",
+                                "from": "Log_Input",
+                                "to": "Call_API"
+                            }
+                        ],
+                        "errorHandler": {
+                            "activities": []
+                        },
+                        "testResult": {
+                            "totalAssertions": 0,
+                            "executedAssertions": 0,
+                            "failedAssertions": 0,
+                            "skippedAssertions": 0,
+                            "successAssertions": 0,
+                            "flowExecuted": false
+                        },
+                        "testStatus": "Testcase failed to execute with error: unable to deserialize response to json due to error: [invalid character 'F' looking for beginning of value]"
+                    }
+                ],
+                "suiteResult": {
+                    "totalTests": 1,
+                    "failedTests": 1,
+                    "errorFailed": 1,
+                    "assertionFailed": 0
+                }
+            }
+        ]
+    },
+    "result": {
+        "totalSuites": 1,
+        "failedSuites": 1
+    }
+}

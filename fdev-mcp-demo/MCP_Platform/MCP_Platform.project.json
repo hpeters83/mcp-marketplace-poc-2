@@ -1,0 +1,39 @@
+{
+  "imports": "FILE_EMBED:imports.json",
+  "name": "Flogo_project",
+  "description": "Flogo Project created with FDev",
+  "version": "1.0.0",
+  "type": "flogo:decomposed_project",
+  "appModel": "1.1.1",
+  "tags": [],
+  "triggers": [
+    "FILE:triggers/MCPTrigger.json"
+  ],
+  "resources": [
+    "FILE:flows/cp_apiv1data-planes_GET.json",
+    "FILE:flows/cp_apiv1data-planesstatus_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdstatus_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdcommands{operation}_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneId_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdapps_GET.json",
+    "FILE:flows/cp_apiv1apps_GET.json",
+    "FILE:flows/cp_apiv1appsappId_GET.json",
+    "FILE:flows/cp_apiv1resources_GET.json",
+    "FILE:flows/cp_apiv1resourcesinstances_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdresourcesinstances_GET.json",
+    "FILE:flows/cp_apiv1resourcesinstancesresourceInstanceId_GET.json",
+    "FILE:flows/cp_apiv1capabilities_GET.json",
+    "FILE:flows/cp_apiv1capabilitiesinstances_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilitiesinstances_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilities-instancesstatus_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilitiesinstances{capabilityInstanceId}status_GET.json",
+    "FILE:flows/cp_apiv1data-planesdataPlaneIdcapabilitiesinstances{capabilityInstanceId}_GET.json"
+  ],
+  "properties": "FILE_EMBED:properties.json",
+  "specs": {
+    "0b275ec8-d279-4050-80ac-bad7097a194c": "FILE_EMBED:specs/TIBCO_Platform_APIs.json"
+  },
+  "connections": {},
+  "contrib": "FILE_DO_EMBED_B64:contrib.json",
+  "metadata": "FILE_EMBED:metadata.json"
+}
