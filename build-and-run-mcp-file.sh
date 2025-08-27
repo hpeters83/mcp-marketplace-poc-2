@@ -34,6 +34,7 @@ fdev sc property MCP_Port 3045 -f $FILE
 
 # Set the Enpoint
 fdev sc property API_Endpoint "http://localhost:9999" -f $FILE
+# fdev sc property API_Endpoint "https://tibcopm.us-west.my.tibco.com" -f $FILE
 # fdev cap API_Endpoint string "https://tibcopm.us-west.my.tibco.com" -f $FILE
 
 
@@ -43,7 +44,7 @@ fdev sc any metadata.endpoints --jsonValue '[{"protocol": "http","port": "3045",
 PROMPT_FLOW=prompt_flow
 
 fdev cf $PROMPT_FLOW -f $FILE
-fdev cth $PROMPT_FLOW MCPTrigger --mcpHandlerType Prompt -f $FILE
+fdev cth $PROMPT_FLOW MCPTrigger --mcpHandlerType Prompt --mcpHandlerName 'UserFinder' --mcpHandlerDescription 'Find you user' -f $FILE
 fdev aa $PROMPT_FLOW set_prompt actreply -f $FILE
 fdev sc flow $PROMPT_FLOW.data.metadata --jsonFile prompt-interface.json  -f $FILE
 fdev sc activity $PROMPT_FLOW.set_prompt.input.reply.mapping.promptResult.messages[0].role user -f $FILE
@@ -51,7 +52,7 @@ fdev sc activity $PROMPT_FLOW.set_prompt.input.reply.mapping.promptResult.messag
 fdev sc activity $PROMPT_FLOW.set_prompt.schemas --jsonFile prompt-reply-interface.json -f $FILE
 
 
-# flogobuild build-exe -f $FILE
+flogobuild build-exe -f $FILE
 
 # flogobuild build-tp-deployment -f $FILE -o ./flogo-mcp-server.zip
 flogobuild build-tp-deployment -f $FILE -o ./

@@ -28,7 +28,7 @@ git commit -m 'DevHubUpdate' || true
 git push || true
 
 # Refresh the template (TODO: Make array)
-template_to_refresh='{"entityRef":"location:default/generated-0b2c17cf6ef9b0da55ab17529145f9b6e624c890"}'
+template_to_refresh='{"entityRef":"location:default/generated-d1f2468a4c0ed3a42b0128da2a256705cd0578df"}'
 
 
 # http://localhost:7007/tibco/hub/api/catalog/refresh
