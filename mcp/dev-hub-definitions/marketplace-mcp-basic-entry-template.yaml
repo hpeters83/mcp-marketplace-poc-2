@@ -289,7 +289,7 @@ spec:
           ingressTLSConfigs: []
           portServicePathMappings:
             - port: 3045
-              servicePath: "/tibco/apps/${{ steps.deploy_mcp_server.output.platformResult.appId }}/mcp"
+              servicePath: "/tibco/apps/${{ steps.deploy_mcp_server.output.platformResult.appId }}/MCPTrigger"
               isPublic: true
               isServiceDiscoveryEnabled: true
           customAnnotations: []
