@@ -160,3 +160,8 @@ flogo-engine
 /fdev-mcp-demo/test.flogo
 /fdev-mcp-demo/test.flogotest
 /fdev-mcp-demo/bin/
+/Platform_MCP_Client
+/Platform_MCP_Client.flogo
+/Platform_MCP_Client.json
+/Platform_MCP_Server
+/Platform_MCP_Server.flogo

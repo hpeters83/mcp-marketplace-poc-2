@@ -8,38 +8,45 @@ cd $1
 ls
 
 # TODO: Pass this in as argument
-# source token.sh
+source token.sh
 
 echo "MCP SEVER NAME: $2"
 
 # FILE="TestMCP.flogo"
 # FILE="TestMCP.json"
-FILE="Customer_MCP_Client.flogo"
+# FILE="Customer_MCP_Client.flogo"
+FILE="Platform_MCP_Server.flogo"
 # SPEC_FILE="simple_spec.json"
-# SPEC_FILE="control-plane-api-1.9.json"
+SPEC_FILE="control-plane-api-1.9.json"
 # CustomerSwaggerClient.json
 # SPEC_FILE="CustomerSwaggerClient.json"
-SPEC_FILE="simple_spec_path.json"
+# SPEC_FILE="simple_spec_path.json"
 
 rm -f $FILE
 
+# Platform
+MCP_PORT=3050
+# Get User
+# MCP_PORT=3045
 
-# fdev cms $SPEC_FILE --token $platform_token -f $FILE
-fdev cms $SPEC_FILE -f $FILE
+fdev cms $SPEC_FILE --token $platform_token -f $FILE
+# fdev cms $SPEC_FILE -f $FILE
 # fdev cms control-plane-api-1.9.json -f MCP_Platform.flogo
 # fdev sc trigger "MCPTrigger.settings.serverPort" 3045 -f $FILE
 # Set the MCP Port
-fdev sc property MCP_Port 3045 -f $FILE
+# fdev sc property MCP_Port 3045 -f $FILE
+
+fdev sc property MCP_Port $MCP_PORT -f $FILE
 
 
 # Set the Enpoint
-fdev sc property API_Endpoint "http://localhost:9999" -f $FILE
-# fdev sc property API_Endpoint "https://tibcopm.us-west.my.tibco.com" -f $FILE
+# fdev sc property API_Endpoint "http://localhost:9999" -f $FILE
+fdev sc property API_Endpoint "https://tibcopm.us-west.my.tibco.com" -f $FILE
 # fdev cap API_Endpoint string "https://tibcopm.us-west.my.tibco.com" -f $FILE
 
 
 # Add this for deployment
-fdev sc any metadata.endpoints --jsonValue '[{"protocol": "http","port": "3045","title": "MCPTrigger","type": "public"}]' -f $FILE
+fdev sc any metadata.endpoints --jsonValue "[{\"protocol\": \"http\",\"port\": \"$MCP_PORT\",\"title\": \"MCPTrigger\",\"type\": \"public\"}]" -f $FILE
 
 PROMPT_FLOW=prompt_flow
 

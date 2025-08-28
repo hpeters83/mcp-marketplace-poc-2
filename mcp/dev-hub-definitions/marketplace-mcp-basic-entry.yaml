@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: marketplace-mcp-basic-entry
-  title: MCP Server Builder (v1756300758)
+  title: MCP Server Builder (v1756373818)
   description: "This marketplace entry builds a Flogo MCP Server and deploys it to a TIBCO Dataplane."
   backstage.io/techdocs-ref: dir:.
   tibco.developer.hub/marketplace:
@@ -35,16 +35,16 @@ spec:
         - mcp_server_name
         - api_to_generate_mcp_server_for
       properties:
-        test_name:
-          title: TEST Name
-          type: string
-          description: My custom name for the component
-          ui:field: ValidateKebabCase
         dataplane_test:
           title: Select Dataplane
           type: string
-          description: Dataplane selector test
-          ui:field: SelectDataplane
+          description: My custom name for the component
+          ui:field: ValidateKebabCase
+        fd_test:
+          title: Select Flogo Deployment
+          type: string
+          description: Dataplane to deploy Flogo App to
+          ui:field: SelectFlogoDeploymentDataplane
         mcp_server_name:
           title: The name of the MCP Server
           type: string
