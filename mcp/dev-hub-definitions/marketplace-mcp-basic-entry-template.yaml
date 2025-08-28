@@ -162,6 +162,10 @@ spec:
           type: string
           description: Id of the Flogo Capability to deploy the MCP Server to
           default: 'd25k2j4tdkpc73bkq9fg'
+        token:
+          title: Token for backend authentication
+          type: string
+          description: Token for backend authentication
 
 
   # Install the agents
@@ -191,6 +195,7 @@ spec:
         scriptPath: 'build-and-run-mcp-file.sh'
         arguments:
           - ${{ parameters.mcp_server_name }}
+          - ${{ parameters.token }}
 
 #    - id: configure_agent
 #      name: Configuring Agent
