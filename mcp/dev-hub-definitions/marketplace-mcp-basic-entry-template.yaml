@@ -35,16 +35,16 @@ spec:
         - mcp_server_name
         - api_to_generate_mcp_server_for
       properties:
-        dataplane_test:
-          title: Select Dataplane
-          type: string
-          description: My custom name for the component
-          ui:field: SelectDataplane
-        fd_test:
-          title: Select Flogo Deployment
-          type: string
-          description: Dataplane to deploy Flogo App to
-          ui:field: SelectFlogoDeploymentDataplane
+#        dataplane_test:
+#          title: Select Dataplane
+#          type: string
+#          description: My custom name for the component
+#          ui:field: SelectDataplane
+#        fd_test:
+#          title: Select Flogo Deployment
+#          type: string
+#          description: Dataplane to deploy Flogo App to
+#          ui:field: SelectFlogoDeploymentDataplane
         mcp_server_name:
           title: The name of the MCP Server
           type: string
@@ -119,29 +119,29 @@ spec:
 #          title: Select Control Plane
 #          type: string
 #          description: Control Plane you want to deploy the MCP Server to
-        name:
-          title: Name
-          type: string
-          description: My custom name for the component
-          ui:field: ValidateKebabCase
         dataplane:
-          title: Select Dataplane
+          title: Select Flogo Deployment
           type: string
-          description: Dataplane you want to deploy the MCP Server to
-          enum:
-            - demo
-            - Platform-Demo-PMs
-            - MP_v1753956342
-            - pparames-vdi-k8s
-            - pm-demo
-            - pparames-vdi
-          enumNames:
-            - demo
-            - Platform-Demo-PMs
-            - MP_v1753956342
-            - pparames-vdi-k8s
-            - pm-demo
-            - pparames-vdi
+          description: Dataplane to deploy Flogo App to
+          ui:field: SelectFlogoDeploymentDataplane
+#        dataplane:
+#          title: Select Dataplane
+#          type: string
+#          description: Dataplane you want to deploy the MCP Server to
+#          enum:
+#            - demo
+#            - Platform-Demo-PMs
+#            - MP_v1753956342
+#            - pparames-vdi-k8s
+#            - pm-demo
+#            - pparames-vdi
+#          enumNames:
+#            - demo
+#            - Platform-Demo-PMs
+#            - MP_v1753956342
+#            - pparames-vdi-k8s
+#            - pm-demo
+#            - pparames-vdi
         dataplane_url:
           title: Dataplane Flogo URL
           type: string
@@ -274,7 +274,7 @@ spec:
         message: "APP ID: ${{ steps.deploy_mcp_server.output.platformResult.appId }}"
         listWorkspace: true
 
-# 4. Make Agent Endpoint Public (Create Websocket)
+# 4. Make MCP Server Endpoint Public (Create Websocket)
     - id: endpoint-public
       name: Make Endpoint Visible
       action: tibco:call-platform-api
@@ -295,18 +295,13 @@ spec:
           customAnnotations: []
 
 
-# TODO: Register the agent
+# TODO: Register the MCP Server
 #    - id: registerItem
   #      name: Register Item
   #      action: catalog:register
   #      input:
   #        optional: true
   #        catalogInfoUrl: "https://github.com/TIBCO-Hub-Backstage/import-poc-hugo/blob/main/import-flow-bw5.yaml"
-
-
-  # TODO: (Next) 1. Create agent components (with websocket url, app deployment config, chat link)
-  # TODO: (Next) 2. Register the agent
-  # TODO: (Next) Add agent chat in the component page
 
 # TODO 5. Create output link to chatbot with wss url in parameter
 
