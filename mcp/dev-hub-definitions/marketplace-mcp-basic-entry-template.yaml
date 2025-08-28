@@ -166,6 +166,7 @@ spec:
           title: Token for backend authentication
           type: string
           description: Token for backend authentication
+          ui:field: Secret
 
 
   # Install the agents
