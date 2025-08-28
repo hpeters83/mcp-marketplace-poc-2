@@ -1,7 +1,0 @@
-properties:
-  - name: API_Endpoint
-    type: string
-    value: http://localhost:9999
-  - name: MCP_Port
-    type: string
-    value: "3040"
