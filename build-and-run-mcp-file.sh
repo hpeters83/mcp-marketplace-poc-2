@@ -8,12 +8,13 @@ cd $1
 ls
 echo TOKEN: $2
 
+# TODO: Where to use this?
+echo "MCP SEVER NAME: $2"
 
-# TODO: Pass this in as argument
+# Passed this in as argument
 # source token.sh
-platform_token=$2
-
-# echo "MCP SEVER NAME: $2"
+platform_token=$3
+echo "PLATFORM TOKEN: $platform_token"
 
 # FILE="TestMCP.flogo"
 # FILE="TestMCP.json"
@@ -53,9 +54,12 @@ fdev sc property API_Endpoint "https://tibcopm.us-west.my.tibco.com" -f $FILE
 fdev sc any metadata.endpoints --jsonValue "[{\"protocol\": \"http\",\"port\": \"$MCP_PORT\",\"title\": \"MCPTrigger\",\"type\": \"public\"}]" -f $FILE
 
 PROMPT_FLOW="prompt_flow"
-MCP_HANDLER="UserFinder"
-MCP_HANDLER_DESCRIPTION="Find your user"
-PROMPT="Find the user with id 1234"
+#MCP_HANDLER="UserFinder"
+#MCP_HANDLER_DESCRIPTION="Find your user"
+#PROMPT="Find the user with id 1234"
+MCP_HANDLER="Application_Report"
+MCP_HANDLER_DESCRIPTION="Create Failed Application_Report"
+PROMPT="Make a report of all the control plane applications in failed status"
 
 fdev cf $PROMPT_FLOW -f $FILE
 fdev cth $PROMPT_FLOW MCPTrigger --mcpHandlerType Prompt --mcpHandlerName "$MCP_HANDLER" --mcpHandlerDescription "$MCP_HANDLER_DESCRIPTION" -f $FILE
