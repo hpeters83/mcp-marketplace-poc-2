@@ -39,7 +39,7 @@ spec:
           title: Select Dataplane
           type: string
           description: My custom name for the component
-          ui:field: ValidateKebabCase
+          ui:field: SelectDataplane
         fd_test:
           title: Select Flogo Deployment
           type: string
