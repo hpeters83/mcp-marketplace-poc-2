@@ -166,7 +166,7 @@ spec:
           title: Token for backend authentication
           type: string
           description: Token for backend authentication
-          ui:field: Secret
+#          ui:field: Secret
 
 
   # Install the agents
@@ -196,7 +196,8 @@ spec:
         scriptPath: 'build-and-run-mcp-file.sh'
         arguments:
           - ${{ parameters.mcp_server_name }}
-          - ${{ secrets.token }}
+          - ${{ parameters.token }}
+#          - ${{ secrets.token }}
 
 #    - id: configure_agent
 #      name: Configuring Agent

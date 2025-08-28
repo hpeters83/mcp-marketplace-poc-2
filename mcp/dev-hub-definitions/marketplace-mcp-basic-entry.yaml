@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: marketplace-mcp-basic-entry
-  title: MCP Server Builder (v1756403493)
+  title: MCP Server Builder (v1756403818)
   description: "This marketplace entry builds a Flogo MCP Server and deploys it to a TIBCO Dataplane."
   backstage.io/techdocs-ref: dir:.
   tibco.developer.hub/marketplace:
@@ -166,7 +166,7 @@ spec:
           title: Token for backend authentication
           type: string
           description: Token for backend authentication
-          ui:field: Secret
+#          ui:field: Secret
 
 
   # Install the agents
@@ -196,7 +196,8 @@ spec:
         scriptPath: 'build-and-run-mcp-file.sh'
         arguments:
           - ${{ parameters.mcp_server_name }}
-          - ${{ secrets.token }}
+          - ${{ parameters.token }}
+#          - ${{ secrets.token }}
 
 #    - id: configure_agent
 #      name: Configuring Agent
