@@ -3,10 +3,9 @@ set -e
 echo "you passed me $*"
 echo "you passed me $@"
 
-echo $1
+echo "Folder: $1"
 cd $1
 ls
-echo TOKEN: $2
 
 # TODO: Where to use this?
 echo "MCP SEVER NAME: $2"

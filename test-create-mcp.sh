@@ -63,20 +63,20 @@ sleep 5
 
 
 
-#for mcp in "${mcp_array[@]}"
-#do
-#  echo "Processing $mcp"
-#  # ifi-bw5-system-enhanced-template.json
-#  MCP_NAME="$mcp-$version"
-#  echo "Processing $mcp with name: $MCP_NAME"
-#  # ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$mcp-template.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@AGENT_NAME@@" "$MCP_NAME")
-#  ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$mcp-template.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@MCP_NAME@@" "$MCP_NAME")
-#  ./run-import-flow.sh $dev_hub_url "$oauth2_token" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json"
-#  # sleep 400
-#  # sleep 120
-#  sleep 5
-#  echo "Initiated install of agent: $MCP_NAME"
-#done
+for mcp in "${mcp_array[@]}"
+do
+  echo "Processing $mcp"
+  # ifi-bw5-system-enhanced-template.json
+  MCP_NAME="$mcp-$version"
+  echo "Processing $mcp with name: $MCP_NAME"
+  # ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$mcp-template.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@AGENT_NAME@@" "$MCP_NAME")
+  ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$mcp-template.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@MCP_NAME@@" "$MCP_NAME")
+  ./run-import-flow.sh $dev_hub_url "$oauth2_token" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json"
+  # sleep 400
+  # sleep 120
+  sleep 5
+  echo "Initiated install of agent: $MCP_NAME"
+done
 
 # ./run-import-flow.sh $dev_hub_url $oauth2_token $import_flow_input_file_send
 
