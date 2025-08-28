@@ -165,3 +165,5 @@ flogo-engine
 /Platform_MCP_Client.json
 /Platform_MCP_Server
 /Platform_MCP_Server.flogo
+/MCP_Server
+/MCP_Server.flogo

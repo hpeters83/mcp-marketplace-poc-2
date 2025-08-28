@@ -259,10 +259,10 @@ spec:
           appName: ${{ parameters.mcp_server_name }}
           tags:
             - mcp_server
-          appProperties:
-            - name: API_Endpoint
-              type: string
-              value: 'https://v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro/tibco/apps/d2crh14g5cus73ebnp4g/ReceiveHTTPMessage/'
+#          appProperties:
+#            - name: API_Endpoint
+#              type: string
+#              value: 'https://v1753956342-mp-flogo.dx-demo.developer-experience.dataplanes.pro/tibco/apps/d2crh14g5cus73ebnp4g/ReceiveHTTPMessage/'
           replicas: 1
           resourceLimits:
             limits:

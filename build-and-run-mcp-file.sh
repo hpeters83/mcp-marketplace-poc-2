@@ -68,7 +68,7 @@ fdev sc activity $PROMPT_FLOW.set_prompt.input.reply.mapping.promptResult.messag
 fdev sc activity $PROMPT_FLOW.set_prompt.input.reply.mapping.promptResult.messages[0].content "$PROMPT" -f $FILE
 fdev sc activity $PROMPT_FLOW.set_prompt.schemas --jsonFile prompt-reply-interface.json -f $FILE
 
-# flogobuild build-exe -f $FILE
+flogobuild build-exe -f $FILE
 
 # flogobuild build-tp-deployment -f $FILE -o ./flogo-mcp-server.zip
 flogobuild build-tp-deployment -f $FILE -o ./
