@@ -71,7 +71,7 @@ do
   echo "Processing $mcp with name: $MCP_NAME"
   # ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$mcp-template.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@AGENT_NAME@@" "$MCP_NAME")
   ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$mcp-template.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME-token.json" "@@TOKEN@@" "$platform_token")
-  ( replaceTemplate "./mcp/install-mcp-inputs/install-mcp-$MCP_NAME-token.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@MCP_NAME@@" "$MCP_NAME")
+  ( replaceTemplate "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME-token.json" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json" "@@MCP_NAME@@" "$MCP_NAME")
   ./run-import-flow.sh $dev_hub_url "$oauth2_token" "./mcp/install-mcp-inputs-tmp/install-mcp-$MCP_NAME.json"
   # sleep 400
   # sleep 120
